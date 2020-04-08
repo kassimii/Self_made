@@ -29,31 +29,31 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //onLoginButtonClick();
+        onLoginButtonClick();
         onProfileButtonClick();
         onMealButtonClick();
         onCameraButtonClick();
     }
 
-//    public void onLoginButtonClick(){
-//        loginButton = (Button) findViewById(R.id.login_button);
-//        loginButton.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        openLoginActivity();
-//                    }
-//                }
-//        );
-//    }
+    public void onLoginButtonClick(){
+        loginButton = (Button) findViewById(R.id.login_button);
+        loginButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openLoginActivity();
+                    }
+                }
+        );
+    }
 
-//    public void openLoginActivity(){
-//        Intent intent = new Intent(this, Login.class);
-//        startActivity(intent);
-//
-//        overridePendingTransition(0,0);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//    }
+    public void openLoginActivity(){
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+
+        overridePendingTransition(0,0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    }
 
     public void onProfileButtonClick(){
         editProfileButton = (Button) findViewById(R.id.profile_button);
@@ -116,6 +116,40 @@ public class MainActivity extends Activity {
 
         overridePendingTransition(0,0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    }
+
+    private FragmentManager getSupportFragmentManager() {
+        return this.fragmentManager;
+    }
+
+    // Replace Login Fragment with animation
+    protected void replaceLoginFragment() {
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                .replace(R.id.frameContainer, new Login(),
+                        Utils.Login_Fragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        // Find the tag of signup and forgot password fragment
+        Fragment SignUp_Fragment = fragmentManager
+                .findFragmentByTag(Utils.SignUp_Fragment);
+        Fragment ForgotPassword_Fragment = fragmentManager
+                .findFragmentByTag(Utils.ForgotPassword_Fragment);
+
+        // Check if both are null or not
+        // If both are not null then replace login fragment else do backpressed
+        // task
+
+        if (SignUp_Fragment != null)
+            replaceLoginFragment();
+        else if (ForgotPassword_Fragment != null)
+            replaceLoginFragment();
+        else
+            super.onBackPressed();
     }
 
 
