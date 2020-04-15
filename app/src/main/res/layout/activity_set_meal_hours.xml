@@ -60,80 +60,13 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="6dp"
         android:layout_marginRight="6dp"
+        android:layout_marginBottom="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/meal_clock" />
-
-    <EditText
-        android:id="@+id/breakfast_time"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:ems="10"
-        android:inputType="time"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/snack1_time"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginBottom="96dp"
-        android:ems="10"
-        android:inputType="time"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/photo_button"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/lunch_time"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginRight="156dp"
-        android:layout_marginBottom="20dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/meals_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/snack2_time"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginBottom="96dp"
-        android:ems="10"
-        android:inputType="time"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/profile_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/dinner_time"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="172dp"
-        android:ems="10"
-        android:inputType="time"
-        android:background="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/title_meal_planning"
@@ -147,51 +80,54 @@
         android:textAlignment="center"
         android:textColor="#EDA145"
         android:textSize="38dp"
-        android:textStyle="bold"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/save_plan_button"
+    <TextView
+        android:id="@+id/instructions_meal_planning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save plan"
+        android:layout_marginTop="75dp"
+        android:text="Choose the time of your meals"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_meal_planning" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/breakfast_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="42dp"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/breakfast_time"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/breakfast" />
 
     <ImageView
         android:id="@+id/lunch_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/meals_button"
-        app:layout_constraintEnd_toStartOf="@+id/snack1_time"
-        app:layout_constraintStart_toEndOf="@+id/snack2_time"
+        android:layout_marginBottom="165dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/lunch" />
 
     <ImageView
         android:id="@+id/snack1_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        app:layout_constraintBottom_toTopOf="@+id/snack1_time"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="265dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/snack1" />
 
@@ -199,10 +135,10 @@
         android:id="@+id/snack2_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginBottom="140dp"
-        app:layout_constraintBottom_toTopOf="@+id/profile_button"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="255dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/snack2" />
 
@@ -210,10 +146,67 @@
         android:id="@+id/dinner_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/dinner_time"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dinner" />
+
+
+    <Button
+        android:id="@+id/breakfast_button"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Breakfast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/snack1_button"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="220dp"
+        android:text="Snack 1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/lunch_button"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="130dp"
+        android:text="Lunch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/snack2_button"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="220dp"
+        android:text="Snack 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dinner_button"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="175dp"
+        android:text="Dinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
