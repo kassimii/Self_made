@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.self_made"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="29" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.example.self_made.ErrorCustomToast" />
+        <activity android:name="com.example.self_made.ForgotPassword" />
+        <activity android:name="com.example.self_made.SignUp" />
+        <activity android:name="com.example.self_made.Login" />
+        <activity android:name="com.example.self_made.AnalyzePhoto" />
+        <activity android:name="com.example.self_made.EditProfile" />
+        <activity android:name="com.example.self_made.SetMealHours" />
+        <activity android:name="com.example.self_made.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

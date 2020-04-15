@@ -1,0 +1,68 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.self_made"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->A:\ic\proiect\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->A:\ic\proiect\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->A:\ic\proiect\app\src\main\AndroidManifest.xml:5:5-26:19
+12        android:allowBackup="true"
+12-->A:\ic\proiect\app\src\main\AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.1.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\e9dab9c67c1ee3668e0bbf86c6d8cbd8\core-1.1.0\AndroidManifest.xml:24:18-86
+14        android:debuggable="true"
+15        android:icon="@mipmap/ic_launcher"
+15-->A:\ic\proiect\app\src\main\AndroidManifest.xml:7:9-43
+16        android:label="@string/app_name"
+16-->A:\ic\proiect\app\src\main\AndroidManifest.xml:8:9-41
+17        android:roundIcon="@mipmap/ic_launcher_round"
+17-->A:\ic\proiect\app\src\main\AndroidManifest.xml:9:9-54
+18        android:supportsRtl="true"
+18-->A:\ic\proiect\app\src\main\AndroidManifest.xml:10:9-35
+19        android:testOnly="true"
+20        android:theme="@style/AppTheme" >
+20-->A:\ic\proiect\app\src\main\AndroidManifest.xml:11:9-40
+21        <activity android:name="com.example.self_made.ErrorCustomToast" />
+21-->A:\ic\proiect\app\src\main\AndroidManifest.xml:12:9-63
+21-->A:\ic\proiect\app\src\main\AndroidManifest.xml:12:19-51
+22        <activity android:name="com.example.self_made.ForgotPassword" />
+22-->A:\ic\proiect\app\src\main\AndroidManifest.xml:13:9-52
+22-->A:\ic\proiect\app\src\main\AndroidManifest.xml:13:19-49
+23        <activity android:name="com.example.self_made.SignUp" />
+23-->A:\ic\proiect\app\src\main\AndroidManifest.xml:14:9-44
+23-->A:\ic\proiect\app\src\main\AndroidManifest.xml:14:19-41
+24        <activity android:name="com.example.self_made.Login" />
+24-->A:\ic\proiect\app\src\main\AndroidManifest.xml:15:9-43
+24-->A:\ic\proiect\app\src\main\AndroidManifest.xml:15:19-40
+25        <activity android:name="com.example.self_made.AnalyzePhoto" />
+25-->A:\ic\proiect\app\src\main\AndroidManifest.xml:16:9-50
+25-->A:\ic\proiect\app\src\main\AndroidManifest.xml:16:19-47
+26        <activity android:name="com.example.self_made.EditProfile" />
+26-->A:\ic\proiect\app\src\main\AndroidManifest.xml:17:9-49
+26-->A:\ic\proiect\app\src\main\AndroidManifest.xml:17:19-46
+27        <activity android:name="com.example.self_made.SetMealHours" />
+27-->A:\ic\proiect\app\src\main\AndroidManifest.xml:18:9-50
+27-->A:\ic\proiect\app\src\main\AndroidManifest.xml:18:19-47
+28        <activity android:name="com.example.self_made.MainActivity" >
+28-->A:\ic\proiect\app\src\main\AndroidManifest.xml:19:9-25:20
+28-->A:\ic\proiect\app\src\main\AndroidManifest.xml:19:19-47
+29            <intent-filter>
+29-->A:\ic\proiect\app\src\main\AndroidManifest.xml:20:13-24:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->A:\ic\proiect\app\src\main\AndroidManifest.xml:21:17-69
+30-->A:\ic\proiect\app\src\main\AndroidManifest.xml:21:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->A:\ic\proiect\app\src\main\AndroidManifest.xml:23:17-77
+32-->A:\ic\proiect\app\src\main\AndroidManifest.xml:23:27-74
+33            </intent-filter>
+34        </activity>
+35    </application>
+36
+37</manifest>
