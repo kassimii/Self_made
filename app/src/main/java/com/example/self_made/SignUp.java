@@ -1,45 +1,34 @@
 package com.example.self_made;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.content.res.XmlResourceParser;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 
-public class SignUp extends Fragment implements OnClickListener {
-    private static View view;
-    private static EditText fullName, emailId, password, confirmPassword;
-    private static TextView login;
-    private static Button signUpButton;
+import androidx.appcompat.app.AppCompatActivity;
 
-    public SignUp() {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    }
+
+public class SignUp extends AppCompatActivity {
+
+    private View view;
+    private EditText fullName, emailId, password, confirmPassword;
+    private TextView login;
+    private Button signUpButton;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.signup_layout, container, false);
-        initViews();
-        setListeners();
-        return view;
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.signup_layout);
 
-    // Initialize all views
-    private void initViews() {
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
         password = (EditText) view.findViewById(R.id.password);
@@ -47,43 +36,24 @@ public class SignUp extends Fragment implements OnClickListener {
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
 
-        // Setting text selector over textviews
-        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validate();
+                }
+        });
 
-            login.setTextColor(csl);
-        } catch (Exception e) {
-        }
-    }
-
-    // Set Listeners
-    private void setListeners() {
-        signUpButton.setOnClickListener(this);
-        login.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.signUpBtn:
-
-                // Call checkValidation method
-                checkValidation();
-                break;
-
-            case R.id.already_user:
-
-                // Replace login fragment
-                new MainActivity().replaceLoginFragment();
-                break;
-        }
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUp.this, Login.class));
+            }
+        });
 
     }
 
     // Check Validation Method
-    private void checkValidation() {
+    private void validate() {
 
         // Get all edittext texts
         String getFullName = fullName.getText().toString();
@@ -102,22 +72,22 @@ public class SignUp extends Fragment implements OnClickListener {
                 || getConfirmPassword.equals("")
                 || getConfirmPassword.length() == 0)
 
-            new ErrorCustomToast().Show_Toast(getActivity(), view,
+            new ErrorCustomToast().Show_Toast(SignUp.this, view,
                     "All fields are required.");
 
             // Check if email id valid or not
         else if (!m.find())
-            new ErrorCustomToast().Show_Toast(getActivity(), view,
+            new ErrorCustomToast().Show_Toast(SignUp.this, view,
                     "Your Email Id is Invalid.");
 
             // Check if both password should be equal
         else if (!getConfirmPassword.equals(getPassword))
-            new ErrorCustomToast().Show_Toast(getActivity(), view,
+            new ErrorCustomToast().Show_Toast(SignUp.this, view,
                     "Both password doesn't match.");
 
             // Else do signup or do your stuff
         else
-            Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
+            Toast.makeText(SignUp.this, "Do SignUp.", Toast.LENGTH_SHORT)
                     .show();
 
     }
