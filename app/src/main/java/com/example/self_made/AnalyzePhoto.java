@@ -90,6 +90,7 @@ public class AnalyzePhoto extends AppCompatActivity {
         image_captured = (ImageView)findViewById(R.id.image_captured);
         capture_image_button = (Button)findViewById(R.id.capture_image_button);
 
+
         capture_image_button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -153,6 +154,7 @@ public class AnalyzePhoto extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(PERMISION_CODE,IMAGE_CAPTURE_CODE,null);
         //called when image was captured from camera
         if(resultCode == RESULT_OK){
             //set the image capture to our imageView

@@ -29,22 +29,35 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fragmentManager = getSupportFragmentManager();
+
+//        // If savedinstnacestate is null then replace login fragment
+//        if (savedInstanceState == null) {
+//            fragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.frameContainer, new Login(),
+//                            Utils.Login_Fragment).commit();
+//        }
+
         onLoginButtonClick();
         onProfileButtonClick();
         onMealButtonClick();
         onCameraButtonClick();
     }
 
-    public void onLoginButtonClick(){
+    public boolean onLoginButtonClick(){
         loginButton = (Button) findViewById(R.id.login_button);
         loginButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         openLoginActivity();
+
                     }
                 }
         );
+
+        return true;
     }
 
     public void openLoginActivity(){

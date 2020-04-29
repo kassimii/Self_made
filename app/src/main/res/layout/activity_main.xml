@@ -16,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_menu_button"
         android:drawableTop="@drawable/ic_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -30,7 +30,7 @@
         android:layout_marginEnd="39dp"
         android:layout_marginRight="39dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_menu_button"
         android:drawableTop="@drawable/ic_clock"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +46,7 @@
         android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_menu_button"
         android:drawableTop="@drawable/ic_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
