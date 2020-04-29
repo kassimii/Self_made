@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragmentManager = getSupportFragmentManager();
+        //fragmentManager = getSupportFragmentManager();
 
 //        // If savedinstnacestate is null then replace login fragment
 //        if (savedInstanceState == null) {

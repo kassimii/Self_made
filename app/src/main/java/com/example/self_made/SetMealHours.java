@@ -1,10 +1,15 @@
 package com.example.self_made;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +45,9 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         4-snack 2
         5-dinner
     */
+
+    private final int NOTIFICATION_ID = 001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,6 +247,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
 
 
     public void sendBreakfastNotification(){
+
         save_meal_plan_button = (Button)findViewById(R.id.save_meal_plan_button);
 
         save_meal_plan_button.setOnClickListener(new View.OnClickListener() {
@@ -246,21 +255,24 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
             public void onClick(View v) {
 
 
-//                Calendar calendar = Calendar.getInstance();
-//
-//                calendar.set(Calendar.HOUR,breakfast_hour);
-//                calendar.set(Calendar.MINUTE,breakfast_minute);
-//
-//                Intent intent = new Intent(SetMealHours.this, NotificationReceiver.class);
-//
-//                PendingIntent pendingIntent = PendingIntent.getBroadcast(SetMealHours.this,100, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.set(Calendar.HOUR,1);
+                calendar.set(Calendar.MINUTE,27);
+
+                Intent intent = new Intent(SetMealHours.this, NotificationReceiver.class);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(SetMealHours.this,NOTIFICATION_ID, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
 
 
             }
         });
+
     }
+
+
 }
 
