@@ -15,14 +15,15 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SetMealHours extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    //    private EditText breakfast_hour, snack1_hour, lunch_hour, snack2_hour, dinner_hour;
-//    private Button save_plan_button;
     private Button analysePhotoButton;
     private Button editProfileButton;
 
@@ -49,6 +50,8 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
     private final int NOTIFICATION_ID = 001;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,10 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         onCameraButtonClick();
         setHours();
         showMealPlan();
-        sendBreakfastNotification();
+        //sendBreakfastNotification();
+        saveMealHoursToDb();
+
+
     }
 
     public void onProfileButtonClick() {
@@ -271,6 +277,60 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
             }
         });
 
+    }
+
+    public void saveMealHoursToDb(){
+        save_meal_plan_button = (Button)findViewById(R.id.save_meal_plan_button);
+
+        save_meal_plan_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //breakfast
+                if(breakfast_hour!=0) {
+                    HashMap<String, Object> breakfastMap = new HashMap<>();
+                    breakfastMap.put("BHour", breakfast_hour);
+                    breakfastMap.put("BMinute", breakfast_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Breakfast").setValue(breakfastMap);
+                }
+
+                //snack1
+                if(snack1_hour!=0) {
+                    HashMap<String,Object> snack1Map = new HashMap<>();
+                    snack1Map.put("S1Hour",snack1_hour);
+                    snack1Map.put("S1Minute",snack1_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Snack1").setValue(snack1Map);
+                }
+
+                //lunch
+                if(lunch_hour!=0) {
+                    HashMap<String, Object> lunchMap = new HashMap<>();
+                    lunchMap.put("LHour", lunch_hour);
+                    lunchMap.put("LMinute", lunch_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Lunch").setValue(lunchMap);
+                }
+
+                //snack2
+                if(snack2_hour!=0) {
+                    HashMap<String,Object> snack2Map = new HashMap<>();
+                    snack2Map.put("S2Hour",snack2_hour);
+                    snack2Map.put("S2Minute",snack2_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Snack2").setValue(snack2Map);
+                }
+
+                //dinner
+                if(dinner_hour!=0) {
+                    HashMap<String, Object> dinnerMap = new HashMap<>();
+                    dinnerMap.put("DHour", dinner_hour);
+                    dinnerMap.put("DMinute", dinner_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Dinner").setValue(dinnerMap);
+                }
+            }
+        });
     }
 
 
