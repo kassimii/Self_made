@@ -28,16 +28,20 @@
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\female.png"
     },
     {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_calories.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_calories.png"
+    },
+    {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_idealkg.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\idealkg.png"
     },
     {
-        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_custom_menu_button.xml.flat",
-        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\custom_menu_button.xml"
-    },
-    {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_foreground.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_custom_menu_button.xml.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\custom_menu_button.xml"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_gluten.png.flat",
@@ -92,16 +96,20 @@
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\layout\\activity_edit_profile.xml"
     },
     {
-        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_sms_notification.png.flat",
-        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_sms_notification.png"
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_photo.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_photo.png"
+    },
+    {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_calories.xml.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_calories.xml"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_portrait.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_portrait.png"
     },
     {
-        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_photo.png.flat",
-        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_photo.png"
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_sms_notification.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_sms_notification.png"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_take_photo.xml.flat",
@@ -140,6 +148,10 @@
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_clock.xml"
     },
     {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_calories.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_calories.png"
+    },
+    {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_notification.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_notification.png"
     },
@@ -154,6 +166,10 @@
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_peanuts.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\peanuts.png"
+    },
+    {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_calories.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_calories.png"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_meal_clock.png.flat",
@@ -196,6 +212,10 @@
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\fish.png"
     },
     {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_calories.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_calories.png"
+    },
+    {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ml.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\ml.png"
     },
@@ -206,6 +226,10 @@
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_dinner.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\dinner.png"
+    },
+    {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_calories.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_calories.png"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_snack1.png.flat",
@@ -228,6 +252,10 @@
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\round_button.xml"
     },
     {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_calories_counter.xml.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\layout\\activity_calories_counter.xml"
+    },
+    {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
@@ -244,16 +272,16 @@
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_portrait.png"
     },
     {
-        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_analyze_photo.xml.flat",
-        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\layout\\activity_analyze_photo.xml"
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_clock.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_clock.png"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
     },
     {
-        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_clock.png.flat",
-        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_clock.png"
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_analyze_photo.xml.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\layout\\activity_analyze_photo.xml"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\anim_right_enter.xml.flat",
@@ -322,6 +350,10 @@
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_foreground.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_custom_dark_green_button.xml.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\custom_dark_green_button.xml"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable_custom_green_button.xml.flat",
@@ -458,6 +490,10 @@
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_calories.png.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_calories.png"
     },
     {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_sms_notification.xml.flat",

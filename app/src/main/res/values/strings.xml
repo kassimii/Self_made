@@ -17,4 +17,10 @@
     <string name="back">BACK</string>
     <string name="error">Invalid Email or Password!</string>
 
+    <string-array name="food">
+        <item>Bagel</item>
+        <item>Bread White</item>
+        <item>Rice (white boiled)</item>
+    </string-array>
+
 </resources>

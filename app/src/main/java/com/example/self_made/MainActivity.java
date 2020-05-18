@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
     private static FragmentManager fragmentManager;
 
     private Button setMealsButton;
-    private Button analysePhotoButton;
+    private Button caloriesCounterButton;
     private Button editProfileButton;
     private Button loginButton;
 
@@ -45,7 +46,7 @@ public class MainActivity extends Activity {
         onLoginButtonClick();
         onProfileButtonClick();
         onMealButtonClick();
-        onCameraButtonClick();
+        onCaloriesButtonCLick();
     }
 
     public boolean onLoginButtonClick(){
@@ -113,24 +114,24 @@ public class MainActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
-    public void onCameraButtonClick(){
-        analysePhotoButton = (Button) findViewById(R.id.photo_button);
-        analysePhotoButton.setOnClickListener(
+    public void onCaloriesButtonCLick() {
+        caloriesCounterButton = (Button) findViewById(R.id.calories_button);
+        caloriesCounterButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openPhotoAnalsisActivity();
+                        finish();
+                        openCaloriesCounterActivity();
                     }
                 }
         );
     }
 
-    public void openPhotoAnalsisActivity()
-    {
-        Intent intent = new Intent(this, AnalyzePhoto.class);
+    public void openCaloriesCounterActivity() {
+        Intent intent = new Intent(this, CaloriesCounter.class);
         startActivity(intent);
 
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 

@@ -34,11 +34,11 @@
         android:drawableTop="@drawable/ic_clock"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/photo_button"
+        app:layout_constraintEnd_toStartOf="@+id/calories_button"
         app:layout_constraintStart_toEndOf="@+id/profile_button" />
 
     <Button
-        android:id="@+id/photo_button"
+        android:id="@+id/calories_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="16dp"

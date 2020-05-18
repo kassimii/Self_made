@@ -1,21 +1,28 @@
 package com.example.self_made;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class EditProfile extends AppCompatActivity {
 
-    private Button setMealsButton, analysePhotoButton, saveProfileButton;
+    private Button setMealsButton, caloriesCounterButton, saveProfileButton;
 
     private EditText ageInput, heightInput, weightInput;
     private ImageButton femaleButton, maleButton, eggsButton,diaryButton, fishButton, glutenButton, peanutButton;
@@ -24,12 +31,18 @@ public class EditProfile extends AppCompatActivity {
     private boolean isFemale, isMale, isAllergicToEggs=false, isAllergicToDiary=false, isAllergicToFish=false, isAllergicToGluten=false, isAllergicToPeanut=false;
     private String allergies="";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_edit_profile);
         onMealButtonClick();
-        onCameraButtonClick();
+        onCaloriesButtonCLick();
         onSaveProfileButtonClick();
     }
 
@@ -55,25 +68,24 @@ public class EditProfile extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
-    public void onCameraButtonClick(){
-        analysePhotoButton = (Button) findViewById(R.id.photo_button);
-        analysePhotoButton.setOnClickListener(
+    public void onCaloriesButtonCLick() {
+        caloriesCounterButton = (Button) findViewById(R.id.calories_button);
+        caloriesCounterButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finish();
-                        openPhotoAnalsisActivity();
+                        openCaloriesCounterActivity();
                     }
                 }
         );
     }
 
-    public void openPhotoAnalsisActivity()
-    {
-        Intent intent = new Intent(this, AnalyzePhoto.class);
+    public void openCaloriesCounterActivity() {
+        Intent intent = new Intent(this, CaloriesCounter.class);
         startActivity(intent);
 
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
@@ -190,10 +202,9 @@ public class EditProfile extends AppCompatActivity {
                     allergies="";
                 }
 
-
+                Toast.makeText(EditProfile.this, "Profile saved!", Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 }

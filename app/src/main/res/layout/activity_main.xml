@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/profile_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginLeft="57dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_menu_button"
         android:drawableTop="@drawable/ic_portrait"
@@ -34,20 +32,19 @@
         android:drawableTop="@drawable/ic_clock"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/photo_button"
+        app:layout_constraintEnd_toStartOf="@+id/calories_button"
         app:layout_constraintStart_toEndOf="@+id/profile_button" />
 
     <Button
-        android:id="@+id/photo_button"
+        android:id="@+id/calories_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginRight="55dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_menu_button"
-        android:drawableTop="@drawable/ic_photo"
+        android:drawableTop="@drawable/ic_calories"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,6 +52,7 @@
         android:id="@+id/app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="SELF-MADE \n HEALTHY"
         android:textAlignment="center"
         android:textColor="#FF295C29"
@@ -63,15 +61,14 @@
         app:layout_constraintBottom_toTopOf="@+id/meals_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="139dp"
         android:layout_height="65dp"
         android:layout_marginTop="48dp"
-        android:background="@drawable/custom_green_button"
+        android:background="@drawable/custom_dark_green_button"
         android:text="Login"
         android:textColor="@color/white"
         android:textSize="36sp"
