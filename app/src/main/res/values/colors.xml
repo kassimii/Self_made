@@ -10,5 +10,6 @@
     <color name="colorPrimaryDark">#2b580c</color>
     <color name="colorAccent">#639a67</color>
     <color name="orange">#d9bf77</color>
+    <color name="whiteish">#f7f7f7</color>
 
 </resources>

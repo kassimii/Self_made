@@ -120,7 +120,6 @@ public class MainActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
                         openCaloriesCounterActivity();
                     }
                 }
