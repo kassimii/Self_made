@@ -13,16 +13,24 @@ import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class Login extends AppCompatActivity{
+
+public class Login extends AppCompatActivity {
     private View view;
 
     private EditText emailid, password;
     private Button loginButton;
     private TextView forgotPassword, signUp;
     private Animation shakeAnimation;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,9 @@ public class Login extends AppCompatActivity{
         loginButton = (Button) view.findViewById(R.id.loginBtn);
         forgotPassword = (TextView) view.findViewById(R.id.forgot_password);
         signUp = (TextView) view.findViewById(R.id.createAccount);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -81,5 +92,14 @@ public class Login extends AppCompatActivity{
             Toast.makeText(this, "Do Login.", Toast.LENGTH_SHORT)
                     .show();
 
+        firebaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

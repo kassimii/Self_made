@@ -1,5 +1,6 @@
 package com.example.self_made;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
@@ -10,8 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +32,7 @@ public class SignUp extends AppCompatActivity {
     private EditText fullName, emailId, password, confirmPassword;
     private TextView login;
     private Button signUpButton;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +46,33 @@ public class SignUp extends AppCompatActivity {
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validate();
+
+                if (validate()) {
+                    String user_name = fullName.getText().toString();
+                    String user_email = emailId.getText().toString().trim();
+                    String user_password = password.getText().toString().trim();
+
+                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                sendUserData(emailId.getText().toString(),  fullName.getText().toString());
+                                firebaseAuth.signOut();
+                                Toast.makeText(SignUp.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(SignUp.this, MainActivity.class));
+                            } else {
+                                Toast.makeText(SignUp.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
+            }
         });
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +85,9 @@ public class SignUp extends AppCompatActivity {
     }
 
     // Check Validation Method
-    private void validate() {
+    private Boolean validate() {
 
+        Boolean result = false;
         // Get all edittext texts
         String getFullName = fullName.getText().toString();
         String getEmailId = emailId.getText().toString();
@@ -87,8 +120,19 @@ public class SignUp extends AppCompatActivity {
 
             // Else do signup or do your stuff
         else
+        {
             Toast.makeText(SignUp.this, "Do SignUp.", Toast.LENGTH_SHORT)
                     .show();
+            result = true;
+        }
+        return result;
+    }
 
+    private void sendUserData(String email, String name){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        UserProfile userProfile = new UserProfile(email, name);
+        myRef.setValue(userProfile);
     }
 }
