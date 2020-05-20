@@ -17,10 +17,13 @@
     <string name="back">BACK</string>
     <string name="error">Invalid Email or Password!</string>
 
-    <string-array name="food">
-        <item>Bagel</item>
-        <item>Bread White</item>
-        <item>Rice (white boiled)</item>
+    <string-array name="foodCategory">
+        <item>Breads and Cereals</item>
+        <item>Meat and Fish</item>
+        <item>Fruits and Vegetables</item>
+        <item>Milk and Dairy</item>
+        <item>Fats and Sugars</item>
+        <item>Others</item>
 
     </string-array>
 

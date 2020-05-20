@@ -24,13 +24,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
-public class CaloriesCounter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CaloriesCounter extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NewMealDialogListener{
 
     private Button editProfileButton,setMealsButton;
-    private Button saveMealButton, addNewMealButton, showMealLogButton;
+    private Button saveMealButton, addNewMealButton, showCaloriesConsumedChartButton;
     private Spinner foodCategorySpinner, foodTypeSpinner;
     private ProgressBar caloriesProgressBar;
     private TextView caloriesConsumedTextView, caloriesLeftTextView;
@@ -44,6 +46,14 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     private int caloriesPerFoodType =-1; //variable for holding the calories each food type selected that have to be added to the daily calories consumed
     private int foodCategorySelected=-1; //variable to find which one of the food categories was selected used to extract calories from db
 
+    private Calendar cDate, cTime;
+    private String currentDate, currentTime;
+
+    @Override
+    public void addFoodType(String foodType, String calories) {
+        FirebaseDatabase.getInstance().getReference().child("Calories").child("Others").child(foodType).setValue(calories);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +65,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_calories_counter);
 
         getCaloriesValuesFromDb();
+        updateDailyConsumedCalories();
         saveCaloriesOfMeal();
         showCaloriesConsumed();
         showCaloriesLeft();
@@ -65,6 +76,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         getFoodTypesFromDatabase();
         chooseFoodCategory();
         addNewFoodType();
+        showCaloriesConsumedChart();
         //updateCaloriesOnProgressBar();
     }
 
@@ -141,6 +153,24 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
 //    public void setCaloriesNeeded(int CN){
 //        this.caloriesNeededDb = CN;
 //    }
+
+    public void updateDailyConsumedCalories(){
+        cDate = Calendar.getInstance();
+        SimpleDateFormat sDate = new SimpleDateFormat("dd-MM-yyyy");
+        currentDate = sDate.format(cDate.getTime());
+
+        cTime = Calendar.getInstance();
+        SimpleDateFormat sTime = new SimpleDateFormat("hh:mm:ss");
+        currentTime = sTime.format(cTime.getTime());
+
+        if(currentTime.equals("00:00:00")){
+            caloriesConsumedDb=0;
+            FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
+        }
+
+        FirebaseDatabase.getInstance().getReference().child("Daily Calories").child(currentDate).setValue(caloriesConsumedDb);
+
+    }
 
     public void setFoodCategoryList(){
         foodCategoryList =  new ArrayList<String>();
@@ -370,6 +400,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                     showCaloriesConsumed();
                     showCaloriesLeft();
                     updateCaloriesOnProgressBar();
+                    updateDailyConsumedCalories();
                }
             }
         });
@@ -434,38 +465,22 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         addNewMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder addMealDialog = new AlertDialog.Builder(CaloriesCounter.this);
-                addMealDialog.setTitle("Add new meal");
+                openDialog();
+            }
+        });
+    }
 
-//                final Spinner foodCategoryInput=new Spinner(CaloriesCounter.this);
-//                ArrayAdapter<String> foodCategoryInputAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner,foodCategoryList);
-//                foodCategoryInput.setAdapter(foodCategoryInputAdapter);
-//                addMealDialog.setView(foodCategoryInput);
+    public void openDialog(){
+        NewMealDialog  newMealDialog = new NewMealDialog();
+        newMealDialog.show(getSupportFragmentManager(),"add meal dialog");
+    }
 
-//                final EditText typeInput = new EditText(CaloriesCounter.this);
-//                typeInput.setInputType(InputType.TYPE_CLASS_TEXT);
-//                addMealDialog.setView(typeInput);
-//
-//                final EditText calorieInput = new EditText(CaloriesCounter.this);
-//                typeInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-//                addMealDialog.setView(calorieInput);
-//
-//                addMealDialog.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        String myText=typeInput.getText().toString();
-//                        Toast.makeText(CaloriesCounter.this, myText, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                addMealDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//                addMealDialog.show();
+    public void showCaloriesConsumedChart(){
+        showCaloriesConsumedChartButton = (Button)findViewById(R.id.show_calories_consumed_chart_button);
+        showCaloriesConsumedChartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),CaloriesConsumedChart.class));
             }
         });
     }

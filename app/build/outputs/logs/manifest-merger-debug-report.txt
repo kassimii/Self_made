@@ -1,14 +1,15 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\6c5a1a33c151bf1b1b969a4997bc8337\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\eea79921d0082cd3162f25540a57b311\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-auth:19.3.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\4189c7719053123afa41922c68903b5b\jetified-firebase-auth-19.3.0\AndroidManifest.xml:17:1-42:12
 MERGED from [com.google.firebase:firebase-database:19.3.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\a858482f0d85511048b88d680e761880\jetified-firebase-database-19.3.0\AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\812875c917e794d268bba5cd02e9fddf\jetified-firebase-messaging-17.3.4\AndroidManifest.xml:17:1-37:12
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\2ac5bf76e1165869d2bd5a42806625d1\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:2:1-20:12
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\68dd590321da53844fc859861b272820\jetified-firebase-auth-interop-19.0.0\AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\fa3d7eac296077651560ac3933490b85\jetified-firebase-database-collection-17.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\705400eb945d98f892428675fcd9f9b5\jetified-firebase-iid-17.0.4\AndroidManifest.xml:17:1-59:12
@@ -40,20 +41,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\patricia.boc\.gr
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\744e890fd9c2229fd55f0f204e895827\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\72cbc39fa25a246d7e646058ccbab8e7\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\a19056003d7a5f2bc9cc665fd561b346\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
 	package
 		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:3:5-36
 		INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
 		INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
 		INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-35:12
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:1-36:12
 		INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:2:11-69
@@ -70,7 +71,7 @@ ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:7:5-68
 	android:name
 		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:7:22-65
 application
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:9:5-33:19
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:9:5-34:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\eea79921d0082cd3162f25540a57b311\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\eea79921d0082cd3162f25540a57b311\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [com.google.firebase:firebase-auth:19.3.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\4189c7719053123afa41922c68903b5b\jetified-firebase-auth-19.3.0\AndroidManifest.xml:23:5-40:19
@@ -115,56 +116,60 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\pa
 		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:10:9-35
 	android:theme
 		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:15:9-40
+activity#com.example.self_made.CaloriesConsumedChart
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:16:9-68
+	android:name
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:16:19-56
 activity#com.example.self_made.CaloriesCounter
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:16:9-62
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:17:9-53
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:16:19-50
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:17:19-50
 activity#com.example.self_made.ErrorCustomToast
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:17:9-54
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:18:9-54
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:17:19-51
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:18:19-51
 activity#com.example.self_made.ForgotPassword
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:18:9-52
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:19:9-52
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:18:19-49
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:19:19-49
 activity#com.example.self_made.SignUp
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:19:9-44
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:20:9-44
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:19:19-41
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:20:19-41
 activity#com.example.self_made.Login
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:20:9-43
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:21:9-43
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:20:19-40
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:21:19-40
 activity#com.example.self_made.AnalyzePhoto
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:21:9-50
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:22:9-50
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:21:19-47
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:22:19-47
 activity#com.example.self_made.EditProfile
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:22:9-49
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:23:9-49
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:22:19-46
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:23:19-46
 activity#com.example.self_made.SetMealHours
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:23:9-50
-	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:23:19-47
-activity#com.example.self_made.MainActivity
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:24:9-30:20
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:24:9-50
 	android:name
 		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:24:19-47
+activity#com.example.self_made.MainActivity
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:25:9-31:20
+	android:name
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:25:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:25:13-29:29
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:26:13-30:29
 action#android.intent.action.MAIN
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:26:17-69
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:27:17-69
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:26:25-66
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:27:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:28:17-77
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:28:27-74
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:29:27-74
 receiver#com.example.self_made.NotificationReceiver
-ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:32:9-58
+ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:33:9-58
 	android:name
-		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:32:19-55
+		ADDED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml:33:19-55
 uses-sdk
 INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\ic_project\Self_made\app\src\main\AndroidManifest.xml
@@ -179,6 +184,8 @@ MERGED from [com.google.firebase:firebase-database:19.3.0] C:\Users\patricia.boc
 MERGED from [com.google.firebase:firebase-database:19.3.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\a858482f0d85511048b88d680e761880\jetified-firebase-database-19.3.0\AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\812875c917e794d268bba5cd02e9fddf\jetified-firebase-messaging-17.3.4\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\812875c917e794d268bba5cd02e9fddf\jetified-firebase-messaging-17.3.4\AndroidManifest.xml:20:5-44
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\2ac5bf76e1165869d2bd5a42806625d1\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:16:5-18:41
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\2ac5bf76e1165869d2bd5a42806625d1\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:16:5-18:41
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\68dd590321da53844fc859861b272820\jetified-firebase-auth-interop-19.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\68dd590321da53844fc859861b272820\jetified-firebase-auth-interop-19.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\patricia.boc\.gradle\caches\transforms-2\files-2.1\fa3d7eac296077651560ac3933490b85\jetified-firebase-database-collection-17.0.1\AndroidManifest.xml:5:5-7:41
