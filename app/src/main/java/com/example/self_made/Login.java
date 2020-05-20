@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +31,6 @@ public class Login extends AppCompatActivity {
     private EditText emailid, password;
     private Button loginButton;
     private TextView forgotPassword, signUp;
-    private Animation shakeAnimation;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -44,11 +45,22 @@ public class Login extends AppCompatActivity {
         signUp = (TextView) view.findViewById(R.id.createAccount);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                validate(emailid.getText().toString(), password.getText().toString());
+                String txt_email = emailid.getText().toString();
+                String txt_password = password.getText().toString();
+                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
+                    Toast.makeText(Login.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    Pattern p = Pattern.compile(Utils.regEx);
+                    Matcher m = p.matcher(txt_email);
+                    if (!m.find())
+                        new ErrorCustomToast().Show_Toast(Login.this, view, "Your Email Id is Invalid.");
+                    else
+                        loginUser(txt_email , txt_password);
+                }
             }
         });
 
@@ -65,40 +77,23 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    // Check Validation before login
-    private void validate(String userName, String userPassword) {
-        // Get email id and password
-        String getEmailId = emailid.getText().toString();
-        String getPassword = password.getText().toString();
+    private void loginUser(String email, String password) {
 
-        // Check patter for email id
-        Pattern p = Pattern.compile(Utils.regEx);
-
-        Matcher m = p.matcher(getEmailId);
-
-        // Check for both field is empty or not
-        if (getEmailId.equals("") || getEmailId.length() == 0
-                || getPassword.equals("") || getPassword.length() == 0) {
-            new ErrorCustomToast().Show_Toast(this, view,
-                    "Enter both credentials.");
-
-        }
-        // Check if email id is valid or not
-        else if (!m.find())
-            new ErrorCustomToast().Show_Toast(this, view,
-                    "Your Email Id is Invalid.");
-            // Else do login and do your stuff
-        else
-            Toast.makeText(this, "Do Login.", Toast.LENGTH_SHORT)
-                    .show();
-
-        firebaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()){
+                    Toast.makeText(Login.this, "Login with success!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Login.this ,EditProfile.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
                 }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
