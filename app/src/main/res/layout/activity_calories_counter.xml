@@ -86,7 +86,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35000002" />
+        app:layout_constraintVertical_bias="0.33" />
 
     <Spinner
         android:id="@+id/food_catergory_spinner"
@@ -98,9 +98,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintVertical_bias="0.45" />
 
     <Spinner
         android:id="@+id/food_type_spinner"
@@ -112,20 +111,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.57" />
 
     <TextView
         android:id="@+id/calories_consumed_textview"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
         android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.16" />
+
+    <TextView
+    android:id="@+id/calories_left_textview1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="left:"
+    android:textSize="24dp"
+    android:textColor="@color/whiteish"
+    android:textStyle="italic"
+    android:textAlignment="center"
+    android:gravity="center"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.75"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.24" />
+
+    <TextView
+        android:id="@+id/calories_left_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24dp"
+        android:textColor="@color/whiteish"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.24" />
 
     <Button
         android:id="@+id/save_meal_button"
@@ -158,10 +195,12 @@
 
     <Button
         android:id="@+id/show_meal_log_button"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="70dp"
         android:background="@drawable/custom_orange_button"
         android:text="Show\n meal log"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"

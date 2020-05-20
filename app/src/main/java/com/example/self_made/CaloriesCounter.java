@@ -1,17 +1,22 @@
 package com.example.self_made;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,21 +25,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CaloriesCounter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button editProfileButton,setMealsButton;
+    private Button saveMealButton, addNewMealButton, showMealLogButton;
     private Spinner foodCategorySpinner, foodTypeSpinner;
     private ProgressBar caloriesProgressBar;
-    private TextView caloriesConsumedTextView;
+    private TextView caloriesConsumedTextView, caloriesLeftTextView;
 
-    private Button breadsCerealButton;
-    private String caloriesPerIngredient;
     private ArrayList<String> foodCategoryList, breadsCerealsList, meatFishList, fruitsVegetablesList, milkAndDairyList, fatsSugarsList, otherFoodTypeList;
-    private ArrayAdapter<String> foodCategoryAdapter, foodTypeAdapter, breadsCerealsAdapter, meatFishAdapter, fruitsVegetablesAdapter,milkAndDairyAdapter, fatsSugarsAdapter, otherFoodTypeAdapter;
+    private ArrayAdapter<String> foodCategoryAdapter, foodTypeAdapter;
 
-    private int BMR, caloriesNeeded, caloriesConsumed=0;
-    private int foodTypeCalories=-1; //variable for holding the calories each food type selected that have to be added to the daily calories consumed
+    private int BMR, caloriesNeeded;
+    private int caloriesConsumed=-1; //flag for saving calories consumed to db
+    public int caloriesNeededDb, caloriesConsumedDb;
+    private int caloriesPerFoodType =-1; //variable for holding the calories each food type selected that have to be added to the daily calories consumed
     private int foodCategorySelected=-1; //variable to find which one of the food categories was selected used to extract calories from db
 
     @Override
@@ -47,15 +54,18 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         catch (NullPointerException e){}
         setContentView(R.layout.activity_calories_counter);
 
+        getCaloriesValuesFromDb();
+        saveCaloriesOfMeal();
+        showCaloriesConsumed();
+        showCaloriesLeft();
         setFoodCategoryList();
         onProfileButtonClick();
         onMealButtonClick();
         calculateNeededCalories();
         getFoodTypesFromDatabase();
         chooseFoodCategory();
-        saveCaloriesOfMeal();
-        showCaloriesConsumed();
-
+        addNewFoodType();
+        //updateCaloriesOnProgressBar();
     }
 
     public void onProfileButtonClick(){
@@ -103,8 +113,38 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
+
+    public void getCaloriesValuesFromDb(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String caloriesN = dataSnapshot.child("Calories Needed").getValue().toString();
+                caloriesNeededDb = Integer.parseInt(caloriesN);
+
+                String caloriesC = dataSnapshot.child("Calories Consumed").getValue().toString();
+                caloriesConsumedDb = Integer.parseInt(caloriesC);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+//    public void setCaloriesConsumed(int CC) {
+//        this.caloriesConsumedDb = CC;
+//    }
+//
+//    public void setCaloriesNeeded(int CN){
+//        this.caloriesNeededDb = CN;
+//    }
+
     public void setFoodCategoryList(){
         foodCategoryList =  new ArrayList<String>();
+        foodCategoryList.add("-Please select a food type-");
         foodCategoryList.add("Breads and Cereals");
         foodCategoryList.add("Meat and Fish");
         foodCategoryList.add("Fruits and Vegetables");
@@ -147,7 +187,6 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                 caloriesNeeded = BMR;
 
                 FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Needed").setValue(caloriesNeeded);
-
             }
 
             @Override
@@ -225,38 +264,41 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         foodCategorySpinner.setAdapter(foodCategoryAdapter);
         foodCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
-
         foodCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    foodCategorySelected=0;
-                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, breadsCerealsList);
+                    foodCategorySelected=-1;
+                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this, R.layout.style_spinner, Collections.<String>emptyList());
                 }
 
                 if(position==1){
                     foodCategorySelected=1;
-                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, meatFishList);
+                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, breadsCerealsList);
                 }
 
                 if(position==2){
                     foodCategorySelected=2;
-                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, fruitsVegetablesList);
+                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, meatFishList);
                 }
 
                 if(position==3){
                     foodCategorySelected=3;
-                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, milkAndDairyList);
+                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, fruitsVegetablesList);
                 }
 
                 if(position==4){
                     foodCategorySelected=4;
-                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, fatsSugarsList);
+                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, milkAndDairyList);
                 }
 
                 if(position==5){
                     foodCategorySelected=5;
+                    foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, fatsSugarsList);
+                }
+
+                if(position==6){
+                    foodCategorySelected=6;
                     foodTypeAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner, otherFoodTypeList);
                 }
 
@@ -278,10 +320,9 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         foodTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                final String foodTypeSelected = parent.getItemAtPosition(position).toString();
+                    final String foodTypeSelected = parent.getItemAtPosition(position).toString();
+                    getCaloriesForFoodTypeFromDb(foodTypeSelected);}
 
-                getCaloriesForFoodTypeFromDb(foodTypeSelected);
-            }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -300,7 +341,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String caloricValueString = dataSnapshot.child(foodType).getValue().toString();
                 int caloricValue = Integer.parseInt(caloricValueString);
-                foodTypeCalories=caloricValue;
+                caloriesPerFoodType = caloricValue;
             }
 
             @Override
@@ -311,13 +352,122 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     }
 
     public void saveCaloriesOfMeal(){
+        saveMealButton = (Button)findViewById(R.id.save_meal_button);
+        saveMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(caloriesPerFoodType ==-1)
+                {
+                    Toast.makeText(CaloriesCounter.this, "Please select your meal!", Toast.LENGTH_SHORT).show();
+                }
+                else { 
+                    caloriesConsumedDb+= caloriesPerFoodType;
+                    caloriesConsumed=1;
+                   if(caloriesConsumed!=-1){
+                        FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
+                        caloriesConsumed=-1;
+                   }
+                    showCaloriesConsumed();
+                    showCaloriesLeft();
+                    updateCaloriesOnProgressBar();
+               }
+            }
+        });
 
     }
 
     public void showCaloriesConsumed(){
         caloriesConsumedTextView = (TextView)findViewById(R.id.calories_consumed_textview);
-        String caloriesConsumedString = String.valueOf(caloriesConsumed);
+        String caloriesConsumedString = String.valueOf(caloriesConsumedDb);
         caloriesConsumedTextView.setText(caloriesConsumedString);
+    }
+
+    public void showCaloriesLeft(){
+        caloriesLeftTextView = (TextView)findViewById(R.id.calories_left_textview2);
+        int caloriesLeft = caloriesNeededDb-caloriesConsumedDb;
+        if(caloriesLeft<0){
+            caloriesLeftTextView.setText("0");
+        }
+        else{
+            String txt = String.valueOf(caloriesLeft);
+            caloriesLeftTextView.setText(txt);
+        }
+
+
+    }
+
+    public void updateCaloriesOnProgressBar(){
+        caloriesProgressBar = (ProgressBar)findViewById(R.id.calories_progress_bar);
+        int percentage = calculateProgress();
+        if(percentage!=-1){
+            caloriesProgressBar.setProgress(percentage);
+        }
+    }
+
+    public int calculateProgress(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Needed");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue().toString();
+                caloriesNeededDb = Integer.parseInt(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        int input_start=0, input_end=caloriesNeededDb, output_start=0, output_end=100;
+
+        double mappedValueDouble;
+        int mappedValue=-1;
+
+            mappedValueDouble= (output_end*caloriesConsumedDb)/input_end;
+            mappedValue = (int)mappedValueDouble;
+        return mappedValue;
+    }
+
+    public void addNewFoodType(){
+        addNewMealButton = (Button)findViewById(R.id.add_new_meal_type_button);
+        addNewMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder addMealDialog = new AlertDialog.Builder(CaloriesCounter.this);
+                addMealDialog.setTitle("Add new meal");
+
+//                final Spinner foodCategoryInput=new Spinner(CaloriesCounter.this);
+//                ArrayAdapter<String> foodCategoryInputAdapter = new ArrayAdapter<String>(CaloriesCounter.this,R.layout.style_spinner,foodCategoryList);
+//                foodCategoryInput.setAdapter(foodCategoryInputAdapter);
+//                addMealDialog.setView(foodCategoryInput);
+
+//                final EditText typeInput = new EditText(CaloriesCounter.this);
+//                typeInput.setInputType(InputType.TYPE_CLASS_TEXT);
+//                addMealDialog.setView(typeInput);
+//
+//                final EditText calorieInput = new EditText(CaloriesCounter.this);
+//                typeInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+//                addMealDialog.setView(calorieInput);
+//
+//                addMealDialog.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String myText=typeInput.getText().toString();
+//                        Toast.makeText(CaloriesCounter.this, myText, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//                addMealDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//
+//                addMealDialog.show();
+            }
+        });
     }
 
     @Override

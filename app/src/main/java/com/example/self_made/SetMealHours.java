@@ -41,6 +41,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
 
     public static String meal_plan_popup;
 
+
     int hour_x, minute_x;
     int breakfast_hour, breakfast_minute, snack1_hour, snack1_minute, lunch_hour, lunch_minute,
             snack2_hour, snack2_minute, dinner_hour, dinner_minute;
@@ -68,6 +69,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         }
         catch (NullPointerException e){}
         setContentView(R.layout.activity_set_meal_hours);
+
         onProfileButtonClick();
         onCaloriesButtonCLick();
         setHours();
