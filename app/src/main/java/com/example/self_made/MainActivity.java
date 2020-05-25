@@ -31,9 +31,7 @@ public class MainActivity extends Activity {
     private Button caloriesCounterButton;
     private Button editProfileButton;
     private Button loginButton;
-
-
-    private Button loginButton, signupButton;
+    private Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +66,46 @@ public class MainActivity extends Activity {
 
                     }
                 });
+      return true;
     }
-  
-  
+
+
+    public void onProfileButtonClick(){
+        editProfileButton = (Button) findViewById(R.id.profile_button);
+        editProfileButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        openProfileEditingActivity();
+                    }
+                }
+        );
+    }
+
+    public void openProfileEditingActivity()
+    {
+        Intent intent = new Intent(this, EditProfile.class);
+        startActivity(intent);
+
+        overridePendingTransition(0,0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    }
+
+    public void onMealButtonClick()
+    {
+        setMealsButton = (Button) findViewById(R.id.meals_button);
+        setMealsButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        finish();
+                        openMealHoursSettingActiviy();
+                    }
+                }
+        );
+    }
 
     public void openMealHoursSettingActiviy(){
         Intent intent = new Intent(this, SetMealHours.class);
@@ -86,10 +121,11 @@ public class MainActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        finish();
                         openCaloriesCounterActivity();
-
+                    }
                 });
-        
+
     }
 
 

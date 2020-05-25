@@ -22,11 +22,19 @@
     <string name="activity_spinner">Choose how active you are</string>
 
     <string-array name="activity_arrays">
+        <item>--Please select activity level</item>
         <item>Sedentary (little or no exercise)</item>
         <item>Light active (exercise 1-3 days/week)</item>
         <item>Moderate active (exercise 3-5 days/week)</item>
         <item>Active (exercise 6-7 days/week)</item>
         <item>Very active (hard exercise 6-7 days/week)</item>
+    </string-array>
+
+    <string-array name="goal_array">
+        <item>--Please select weight goal</item>
+        <item>Lose weight</item>
+        <item>Maintain weight</item>
+        <item>Gain weight</item>
     </string-array>
 
     <string-array name="foodCategory">
@@ -39,12 +47,5 @@
 
     </string-array>
 
-    <string-array name="activity_arrays">
-        <item>Sedentary (little or no exercise)</item>
-        <item>Light active (exercise 1-3 days/week)</item>
-        <item>Moderate active (exercise 3-5 days/week)</item>
-        <item>Active (exercise 6-7 days/week)</item>
-        <item>Very active (hard exercise 6-7 days/week)</item>
-    </string-array>
 
 </resources>

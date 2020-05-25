@@ -41,7 +41,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     private ArrayList<String> foodCategoryList, breadsCerealsList, meatFishList, fruitsVegetablesList, milkAndDairyList, fatsSugarsList, otherFoodTypeList;
     private ArrayAdapter<String> foodCategoryAdapter, foodTypeAdapter;
 
-    private int BMR, caloriesNeeded;
+    private int BMR, AMR, caloriesNeeded;
     private int caloriesConsumed=-1; //flag for saving calories consumed to db
     public int caloriesNeededDb, caloriesConsumedDb;
     private int caloriesPerFoodType =-1; //variable for holding the calories each food type selected that have to be added to the daily calories consumed
@@ -101,7 +101,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
 
-        overridePendingTransition(0,0);
+        this.overridePendingTransition(0,0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
@@ -112,7 +112,6 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         finish();
                         openMealHoursSettingActiviy();
                     }
@@ -124,7 +123,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         Intent intent = new Intent(this, SetMealHours.class);
         startActivity(intent);
 
-        overridePendingTransition(0,0);
+        this.overridePendingTransition(0,0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
@@ -193,19 +192,24 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int age,height,weight;
+                int age,height,weight, activityLevel, weightGoal;
                 double heightInches, weightPounds;
                 double BMRDouble=0;
+                double AMRDouble=0;
 
                 String gender = dataSnapshot.child("Gender").getValue().toString();
                 String weightString = dataSnapshot.child("Weight").getValue().toString();
                 String heightString = dataSnapshot.child("Height").getValue().toString();
                 String ageString = dataSnapshot.child("Age").getValue().toString();
+                String activityLevelString = dataSnapshot.child("Activity Level").getValue().toString();
+                String weightGoalString = dataSnapshot.child("Weight Goal").getValue().toString();
 
 
                 age = Integer.parseInt(ageString);
                 weight = Integer.parseInt(weightString);
                 height = Integer.parseInt(heightString);
+                activityLevel = Integer.parseInt(activityLevelString);
+                weightGoal = Integer.parseInt(weightGoalString);
 
                 weightPounds = weight*2.2;
                 heightInches = height*0.39;
@@ -219,7 +223,40 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                 }
 
                 BMR = (int)BMRDouble;
-                caloriesNeeded = BMR;
+
+                if(activityLevel==1){
+                    AMRDouble = BMR * 1.2;
+                }
+
+                if(activityLevel==2){
+                    AMRDouble = BMR * 1.375;
+                }
+
+                if(activityLevel==3){
+                    AMRDouble = BMR * 1.55;
+                }
+
+                if(activityLevel==4){
+                    AMRDouble = BMR * 1.725;
+                }
+
+                if(activityLevel==5){
+                    AMRDouble = BMR * 1.9;
+                }
+
+                AMR=(int)AMRDouble;
+
+                if(weightGoal==1){
+                    caloriesNeeded = AMR - 500;
+                }
+
+                if(weightGoal==2){
+                    caloriesNeeded = AMR;
+                }
+
+                if(weightGoal==3){
+                    caloriesNeeded = AMR + 300;
+                }
 
                 FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Needed").setValue(caloriesNeeded);
             }
