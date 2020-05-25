@@ -1,4 +1,0 @@
-#Mon May 25 16:18:24 EEST 2020
-base.0=C\:\\Users\\deiana\\Desktop\\Proiect IC\\login_part\\Self_made\\app\\build\\intermediates\\dex\\debug\\out\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
