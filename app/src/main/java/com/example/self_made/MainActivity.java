@@ -16,119 +16,30 @@ import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends Activity {
 
-    private static FragmentManager fragmentManager;
 
-    private Button setMealsButton;
-    private Button analysePhotoButton;
-    private Button editProfileButton;
-    private Button loginButton;
-
+    private Button loginButton, signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //fragmentManager = getSupportFragmentManager();
-
-//        // If savedinstnacestate is null then replace login fragment
-//        if (savedInstanceState == null) {
-//            fragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.frameContainer, new Login(),
-//                            Utils.Login_Fragment).commit();
-//        }
-
-        onLoginButtonClick();
-        onProfileButtonClick();
-        onMealButtonClick();
-        onCameraButtonClick();
-    }
-
-    public boolean onLoginButtonClick(){
         loginButton = (Button) findViewById(R.id.login_button);
+        signupButton = (Button) findViewById(R.id.signup_button);
+
         loginButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openLoginActivity();
-
+                        startActivity(new Intent(MainActivity.this, Login.class));
                     }
-                }
-        );
-
-        return true;
-    }
-
-    public void openLoginActivity(){
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
-
-        overridePendingTransition(0,0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
-    public void onProfileButtonClick(){
-        editProfileButton = (Button) findViewById(R.id.profile_button);
-        editProfileButton.setOnClickListener(
+                });
+        signupButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openProfileEditingActivity();
+                        startActivity(new Intent(MainActivity.this, SignUp.class));
                     }
-                }
-        );
+                });
     }
-
-    public void openProfileEditingActivity()
-    {
-        Intent intent = new Intent(this, EditProfile.class);
-        startActivity(intent);
-
-        overridePendingTransition(0,0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); // no animations between activity change
-    }
-
-    public void onMealButtonClick()
-    {
-        setMealsButton = (Button) findViewById(R.id.meals_button);
-        setMealsButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openMealHoursSettingActiviy();
-                    }
-                }
-        );
-    }
-
-    public void openMealHoursSettingActiviy(){
-        Intent intent = new Intent(this, SetMealHours.class);
-        startActivity(intent);
-
-        overridePendingTransition(0,0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
-    public void onCameraButtonClick(){
-        analysePhotoButton = (Button) findViewById(R.id.photo_button);
-        analysePhotoButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openPhotoAnalsisActivity();
-                    }
-                }
-        );
-    }
-
-    public void openPhotoAnalsisActivity()
-    {
-        Intent intent = new Intent(this, AnalyzePhoto.class);
-        startActivity(intent);
-
-        overridePendingTransition(0,0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
 }
