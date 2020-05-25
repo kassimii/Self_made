@@ -1,4 +1,5 @@
 package com.example.self_made;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -14,16 +15,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SetMealHours extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    //    private EditText breakfast_hour, snack1_hour, lunch_hour, snack2_hour, dinner_hour;
-//    private Button save_plan_button;
-    private Button analysePhotoButton;
+    private Button caloriesCounterButton;
     private Button editProfileButton;
 
     private Button breakfast_button, snack1_button, lunch_button, snack2_button, dinner_button;
@@ -32,6 +40,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
     private Button save_meal_plan_button, show_meal_plan_button;
 
     public static String meal_plan_popup;
+
 
     int hour_x, minute_x;
     int breakfast_hour, breakfast_minute, snack1_hour, snack1_minute, lunch_hour, lunch_minute,
@@ -49,15 +58,26 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
     private final int NOTIFICATION_ID = 001;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_set_meal_hours);
+
         onProfileButtonClick();
-        onCameraButtonClick();
+        onCaloriesButtonCLick();
         setHours();
         showMealPlan();
-        sendBreakfastNotification();
+        //sendBreakfastNotification();
+        saveMealHoursToDb();
+
+
     }
 
     public void onProfileButtonClick() {
@@ -81,21 +101,21 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
-    public void onCameraButtonClick() {
-        analysePhotoButton = (Button) findViewById(R.id.photo_button);
-        analysePhotoButton.setOnClickListener(
+    public void onCaloriesButtonCLick() {
+        caloriesCounterButton = (Button) findViewById(R.id.calories_button);
+        caloriesCounterButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finish();
-                        openPhotoAnalsisActivity();
+                        openCaloriesCounterActivity();
                     }
                 }
         );
     }
 
-    public void openPhotoAnalsisActivity() {
-        Intent intent = new Intent(this, AnalyzePhoto.class);
+    public void openCaloriesCounterActivity() {
+        Intent intent = new Intent(this, CaloriesCounter.class);
         startActivity(intent);
 
         overridePendingTransition(0, 0);
@@ -225,11 +245,11 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
            // showHourDinner.setText("hour: " + dinner_hour + "\nminute: " + dinner_minute);
         }
 
-        meal_plan_popup="Breakfast: " + breakfast_hour + ":" + breakfast_minute + "\n" +
-                "Snack 1: " + snack1_hour + ":" + snack1_minute + "\n" +
-                "Lunch: " + lunch_hour + ":" + lunch_minute + "\n" +
-                "Snack 2: " + snack2_hour + ":" + snack2_minute + "\n" +
-                "Dinner: " + dinner_hour + ":" + dinner_minute + "\n" ;
+//        meal_plan_popup="Breakfast: " + breakfast_hour + ":" + breakfast_minute + "\n" +
+//                "Snack 1: " + snack1_hour + ":" + snack1_minute + "\n" +
+//                "Lunch: " + lunch_hour + ":" + lunch_minute + "\n" +
+//                "Snack 2: " + snack2_hour + ":" + snack2_minute + "\n" +
+//                "Dinner: " + dinner_hour + ":" + dinner_minute + "\n" ;
     }
 
     public void showMealPlan(){
@@ -239,6 +259,33 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         show_meal_plan_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("MealHours");
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String BHour=dataSnapshot.child("Breakfast").child("BHour").getValue().toString();
+                        String BMinute=dataSnapshot.child("Breakfast").child("BMinute").getValue().toString();
+                        String S1Hour=dataSnapshot.child("Snack1").child("S1Hour").getValue().toString();
+                        String S1Minute=dataSnapshot.child("Snack1").child("S1Minute").getValue().toString();
+                        String LHour=dataSnapshot.child("Lunch").child("LHour").getValue().toString();
+                        String LMinute=dataSnapshot.child("Lunch").child("LMinute").getValue().toString();
+                        String S2Hour=dataSnapshot.child("Snack2").child("S2Hour").getValue().toString();
+                        String S2Minute=dataSnapshot.child("Snack2").child("S2Minute").getValue().toString();
+                        String DHour=dataSnapshot.child("Dinner").child("DHour").getValue().toString();
+                        String DMinute=dataSnapshot.child("Dinner").child("DMinute").getValue().toString();
+
+                        meal_plan_popup="Breakfast:     " + BHour + ":" + BMinute + "\n" +
+                                        "Snack 1:      " + S1Hour + ":" + S1Minute + "\n" +
+                                        "Lunch:          " + LHour + ":" + LMinute + "\n" +
+                                        "Snack 2:      " + S2Hour + ":" + S2Minute + "\n" +
+                                        "Dinner:         " + DHour + ":" + DMinute + "\n" ;
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 ShowMealPlan showMealPlan = new ShowMealPlan();
                 showMealPlan.show(getSupportFragmentManager(), "Meal Planning");
             }
@@ -271,6 +318,62 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
             }
         });
 
+    }
+
+    public void saveMealHoursToDb(){
+        save_meal_plan_button = (Button)findViewById(R.id.save_meal_plan_button);
+
+        save_meal_plan_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //breakfast
+                if(breakfast_hour!=0) {
+                    HashMap<String, Object> breakfastMap = new HashMap<>();
+                    breakfastMap.put("BHour", breakfast_hour);
+                    breakfastMap.put("BMinute", breakfast_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Breakfast").setValue(breakfastMap);
+                }
+
+                //snack1
+                if(snack1_hour!=0) {
+                    HashMap<String,Object> snack1Map = new HashMap<>();
+                    snack1Map.put("S1Hour",snack1_hour);
+                    snack1Map.put("S1Minute",snack1_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Snack1").setValue(snack1Map);
+                }
+
+                //lunch
+                if(lunch_hour!=0) {
+                    HashMap<String, Object> lunchMap = new HashMap<>();
+                    lunchMap.put("LHour", lunch_hour);
+                    lunchMap.put("LMinute", lunch_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Lunch").setValue(lunchMap);
+                }
+
+                //snack2
+                if(snack2_hour!=0) {
+                    HashMap<String,Object> snack2Map = new HashMap<>();
+                    snack2Map.put("S2Hour",snack2_hour);
+                    snack2Map.put("S2Minute",snack2_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Snack2").setValue(snack2Map);
+                }
+
+                //dinner
+                if(dinner_hour!=0) {
+                    HashMap<String, Object> dinnerMap = new HashMap<>();
+                    dinnerMap.put("DHour", dinner_hour);
+                    dinnerMap.put("DMinute", dinner_minute);
+
+                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Dinner").setValue(dinnerMap);
+                }
+
+                Toast.makeText(SetMealHours.this, "Meal hours saved!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

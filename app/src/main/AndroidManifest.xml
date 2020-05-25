@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.self_made">
 
+
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SET_ALARM"/>
+
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".CaloriesChart"></activity>
+        <activity android:name=".CaloriesConsumedChart" />
+        <activity android:name=".CaloriesCounter" />
+        <activity android:name=".ErrorCustomToast" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".SignUp" />
+        <activity android:name=".Login" />
+        <activity android:name=".AnalyzePhoto" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".SetMealHours" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +34,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <receiver android:name=".NotificationReceiver" />
         <activity android:name=".ErrorCustomToast"/>
         <activity android:name=".ForgotPassword" />
         <activity android:name=".SignUp" />
@@ -27,5 +44,6 @@
         <activity android:name=".AnalyzePhoto" />
         <activity android:name=".EditProfile" />
         <activity android:name=".SetMealHours"></activity>
+
     </application>
 </manifest>

@@ -6,9 +6,10 @@
     <color name="black">#000000</color>
     <color name="grey">#DCDBDB</color>
     <color name="button_selectorcolor">#9E9E9E</color>
-    <color name="colorPrimary">#FFD6F9D6</color>
-    <color name="colorPrimaryDark">#FF295C29</color>
-    <color name="colorAccent">#FF66CE66</color>
-    <color name="orange">#EDA145</color>
+    <color name="colorPrimary">#d8ebb5</color>
+    <color name="colorPrimaryDark">#2b580c</color>
+    <color name="colorAccent">#639a67</color>
+    <color name="orange">#d9bf77</color>
+    <color name="whiteish">#f7f7f7</color>
 
 </resources>

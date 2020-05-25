@@ -4,8 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/profile_button"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_menu_button"
+        android:drawableTop="@drawable/ic_portrait"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/meals_button"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_menu_button"
+        android:drawableTop="@drawable/ic_clock"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calories_button"
+        app:layout_constraintStart_toEndOf="@+id/profile_button" />
+
+    <Button
+        android:id="@+id/calories_button"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_menu_button"
+        android:drawableTop="@drawable/ic_calories"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,6 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.961" />
+
 
     <TextView
         android:id="@+id/app_title"

@@ -10,38 +10,41 @@
     tools:context=".EditProfile">
 
     <TextView
+        android:id="@+id/edit_profile_title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Hi, "
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/edit_profile_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="90dp"
         android:gravity="center"
         android:text="We want to know more about you!"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_female"
+        android:id="@+id/female_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="145dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:background="@drawable/round_button"
@@ -52,10 +55,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_male"
+        android:id="@+id/male_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="145dp"
         android:layout_marginEnd="95dp"
         android:layout_marginRight="95dp"
         android:layout_weight="1"
@@ -68,166 +71,151 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/age_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="235dp"
         android:gravity="center"
         android:text="Age:"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="125dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:background="#D5FEFFFF"
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_male" />
-
     <TextView
+        android:id="@+id/height_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="272dp"
+        android:layout_marginTop="285dp"
         android:gravity="center"
         android:text="Height:"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/height"
-        android:layout_width="125dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:background="#D5FEFFFF"
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_male" />
-
 
     <TextView
+        android:id="@+id/weight_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="322dp"
+        android:layout_marginTop="335dp"
         android:gravity="center"
         android:text="Weight:"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/weight"
-        android:layout_width="125dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:background="#D5FEFFFF"
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_male" />
-
 
     <TextView
+        android:id="@+id/allergies_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="362dp"
+        android:layout_marginTop="410dp"
         android:gravity="center"
         android:text="Allergies:"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_eggs"
+        android:id="@+id/eggs_button"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="404dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:background="@drawable/round_button"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/egg"
+        app:layout_constraintEnd_toStartOf="@+id/dairy_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_dairy"
+        android:id="@+id/dairy_button"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="404dp"
-        android:layout_marginEnd="240dp"
-        android:layout_marginRight="240dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:background="@drawable/round_button"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/dairy"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fish_button"
+        app:layout_constraintStart_toEndOf="@+id/eggs_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_fish"
+        android:id="@+id/fish_button"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="404dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginRight="172dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:background="@drawable/round_button"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/fish"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gluten_button"
+        app:layout_constraintStart_toEndOf="@+id/dairy_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_gluten"
+        android:id="@+id/gluten_button"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="404dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:background="@drawable/round_button"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/gluten"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/peanut_button"
+        app:layout_constraintStart_toEndOf="@+id/fish_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_peanut"
+        android:id="@+id/peanut_button"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="404dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:background="@drawable/round_button"
@@ -235,7 +223,9 @@
         android:scaleType="fitCenter"
         android:src="@drawable/peanuts"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gluten_button"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -333,14 +323,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ideal_weight" />
 
+
     <Button
         android:id="@+id/profile_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginLeft="57dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_menu_button"
         android:drawableTop="@drawable/ic_portrait"
@@ -360,22 +349,83 @@
         android:drawableTop="@drawable/ic_clock"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/photo_button"
+        app:layout_constraintEnd_toStartOf="@+id/calories_button"
         app:layout_constraintStart_toEndOf="@+id/profile_button" />
 
     <Button
-        android:id="@+id/photo_button"
+        android:id="@+id/calories_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginRight="55dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_menu_button"
-        android:drawableTop="@drawable/ic_photo"
+        android:drawableTop="@drawable/ic_calories"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/save_profile_button"
+        android:layout_width="114dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_orange_button"
+        android:text="SAVE"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/age_input"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/age_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/height_input"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/height_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/weight_input"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="335dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/weight_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
