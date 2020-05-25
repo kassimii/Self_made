@@ -336,6 +336,10 @@
         "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\drawable\\custom_take_photo_button.xml"
     },
     {
+        "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_calories_chart.xml.flat",
+        "source": "D:\\ic_project\\Self_made\\app\\src\\main\\res\\layout\\activity_calories_chart.xml"
+    },
+    {
         "merged": "D:\\ic_project\\Self_made\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_sms_notification.png.flat",
         "source": "D:\\ic_project\\Self_made\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_sms_notification.png"
     },

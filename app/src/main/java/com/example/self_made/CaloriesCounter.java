@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,6 +49,8 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
 
     private Calendar cDate, cTime;
     private String currentDate, currentTime;
+
+
 
     @Override
     public void addFoodType(String foodType, String calories) {
@@ -128,6 +131,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
 
     public void getCaloriesValuesFromDb(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -143,6 +147,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
 
             }
         });
+
     }
 
 
@@ -480,7 +485,13 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         showCaloriesConsumedChartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CaloriesConsumedChart.class));
+
+                startActivity(new Intent(getApplicationContext(),CaloriesChart.class));
+//
+//                Intent intent = new Intent(getApplicationContext(),CaloriesConsumedChart.class);
+//                intent.putExtra("CALORIES_INFO",caloriesConsumedInfo);
+//                intent.putExtra("DATE_INFO",dateInfo);
+//                startActivity(intent);
             }
         });
     }
