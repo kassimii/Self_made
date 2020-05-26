@@ -17,34 +17,50 @@ class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
-        {
-            CharSequence name = "Breakfast notification";
-            String description = "show notification";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
 
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name, importance);
-            notificationChannel.setDescription(description);
+        Intent repeating_intent =  new Intent(context,CaloriesCounter.class);
+        repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-
-        Intent analyze_photo_intent = new Intent(context, AnalyzePhoto.class);
-        analyze_photo_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        PendingIntent pendingIntent =  PendingIntent.getActivity(context,NOTIFICATION_ID,analyze_photo_intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(android.R.drawable.arrow_up_float)
-                .setContentTitle("Don't forget to eat breakfast!")
-                .setContentText("Analyze your breakfast ingredients")
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle("Breakfast")
+                .setContentText("Eat your fruits")
                 .setAutoCancel(true);
 
-        notificationManager.notify(NOTIFICATION_ID,builder.build());
+        notificationManager.notify(100, builder.build());
 
+
+
+        //        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+//        {
+//            CharSequence name = "Breakfast notification";
+//            String description = "show notification";
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//
+//            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name, importance);
+//            notificationChannel.setDescription(description);
+//
+//            notificationManager.createNotificationChannel(notificationChannel);
+//        }
+//
+//
+//        Intent analyze_photo_intent = new Intent(context, AnalyzePhoto.class);
+//        analyze_photo_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//        PendingIntent pendingIntent =  PendingIntent.getActivity(context,NOTIFICATION_ID,analyze_photo_intent,PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+//                .setContentIntent(pendingIntent)
+//                .setSmallIcon(android.R.drawable.arrow_up_float)
+//                .setContentTitle("Don't forget to eat breakfast!")
+//                .setContentText("Analyze your breakfast ingredients")
+//                .setAutoCancel(true);
+//
+//        notificationManager.notify(NOTIFICATION_ID,builder.build());
+//
     }
 
 

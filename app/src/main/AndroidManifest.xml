@@ -26,6 +26,7 @@
         <activity android:name=".AnalyzePhoto" />
         <activity android:name=".EditProfile" />
         <activity android:name=".SetMealHours" />
+        <activity android:name=".NotificationReceiver"/>
 
         <activity android:name=".MainActivity" >
             <intent-filter>
