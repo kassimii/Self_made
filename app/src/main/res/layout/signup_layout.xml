@@ -51,7 +51,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_signup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -67,7 +67,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/confirmPassword"
+        android:id="@+id/confirmPassword_signup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

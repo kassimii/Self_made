@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
@@ -33,12 +35,13 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.signup_layout);
 
         fullName = (EditText) findViewById(R.id.fullName);
         emailId = (EditText) findViewById(R.id.userEmailId);
-        password = (EditText) findViewById(R.id.password);
-        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
+        password = (EditText) findViewById(R.id.password_signup);
+        confirmPassword = (EditText) findViewById(R.id.confirmPassword_signup);
         signUpButton = (Button) findViewById(R.id.signUpBtn);
         login = (TextView) findViewById(R.id.already_user);
 
@@ -96,8 +99,8 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        HashMap<String, Object> usersMap = new HashMap<>();
-        usersMap.put("Name", name);
-        FirebaseDatabase.getInstance().getReference().child("Users").setValue(usersMap);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user.getUid();
+        FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Name").setValue(name);
     }
 }

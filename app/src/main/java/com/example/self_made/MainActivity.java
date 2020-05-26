@@ -1,52 +1,34 @@
 package com.example.self_made;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.FirebaseApp;
 
 
 public class MainActivity extends Activity {
 
 
-    private static FragmentManager fragmentManager;
-
-    private Button setMealsButton;
-    private Button caloriesCounterButton;
-    private Button editProfileButton;
-    private Button loginButton;
-    private Button signupButton;
+    private Button loginButton, signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
-        onLoginButtonClick();
-        onProfileButtonClick();
-        onMealButtonClick();
-        onCaloriesButtonCLick();
-    }
-
-    public boolean onLoginButtonClick(){
-        loginButton = (Button) findViewById(R.id.login_button);
-        signupButton = (Button) findViewById(R.id.signup_button);
+        loginButton = (Button) findViewById(R.id.login_button_main);
+        signupButton = (Button) findViewById(R.id.signup_button_main);
 
         loginButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -54,88 +36,13 @@ public class MainActivity extends Activity {
                     public void onClick(View v) {
                         startActivity(new Intent(MainActivity.this, Login.class));
                     }
-
-                }
-        );
-      
-      signupButton.setOnClickListener(
+                });
+        signupButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(MainActivity.this, SignUp.class));
-
                     }
                 });
-      return true;
     }
-
-
-    public void onProfileButtonClick(){
-        editProfileButton = (Button) findViewById(R.id.profile_button);
-        editProfileButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        openProfileEditingActivity();
-                    }
-                }
-        );
-    }
-
-    public void openProfileEditingActivity()
-    {
-        Intent intent = new Intent(this, EditProfile.class);
-        startActivity(intent);
-
-        overridePendingTransition(0,0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
-    public void onMealButtonClick()
-    {
-        setMealsButton = (Button) findViewById(R.id.meals_button);
-        setMealsButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        finish();
-                        openMealHoursSettingActiviy();
-                    }
-                }
-        );
-    }
-
-    public void openMealHoursSettingActiviy(){
-        Intent intent = new Intent(this, SetMealHours.class);
-        startActivity(intent);
-
-        overridePendingTransition(0,0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
-    public void onCaloriesButtonCLick() {
-        caloriesCounterButton = (Button) findViewById(R.id.calories_button);
-        caloriesCounterButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        openCaloriesCounterActivity();
-                    }
-                });
-
-    }
-
-
-    public void openCaloriesCounterActivity() {
-        Intent intent = new Intent(this, CaloriesCounter.class);
-        startActivity(intent);
-
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
-
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,12 +24,13 @@ public class ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.forgotpassword_layout);
 
         emailId = (EditText) findViewById(R.id.registered_emailid);
-        password = (EditText) findViewById(R.id.password);
-        confirfmPassword = (EditText) findViewById(R.id.confirmPassword);
-        submit = (Button) findViewById(R.id.forgot_button);
+        password = (EditText) findViewById(R.id.password_new);
+        confirfmPassword = (EditText) findViewById(R.id.confirmPassword_new);
+        submit = (Button) findViewById(R.id.forgot_sumit_button);
         back = (Button) findViewById(R.id.backToLoginBtn);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
