@@ -316,10 +316,26 @@ public class EditProfile extends AppCompatActivity {
                     databaseRef.child("Profile").child("Weight Goal").setValue(goalSelected);
                 }
 
-//                String zeroValue="1";
-//                databaseRef.child("Profile").child("Calories Consumed").setValue(zeroValue);
-//                databaseRef.child("Profile").child("Calories Needed").setValue(zeroValue);
-//                databaseRef.child("Profile").child("Current Day").setValue(zeroValue);
+                DatabaseReference reference = databaseRef.child("Profile");
+
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.child("Calories Consumed").exists()){
+                            String zeroValue="1";
+                            databaseRef.child("Profile").child("Calories Consumed").setValue(zeroValue);
+                            databaseRef.child("Profile").child("Calories Needed").setValue(zeroValue);
+                            databaseRef.child("Profile").child("Current Day").setValue(zeroValue);
+                            Toast.makeText(EditProfile.this, "created", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 Toast.makeText(EditProfile.this, "Profile saved!", Toast.LENGTH_SHORT).show();
             }
