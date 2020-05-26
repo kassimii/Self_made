@@ -91,6 +91,9 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Name").setValue(name);
+
                     Toast.makeText(SignUp.this, "Sign up with success!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUp.this, EditProfile.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -105,8 +108,5 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String userId = user.getUid();
-        FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Name").setValue(name);
     }
 }

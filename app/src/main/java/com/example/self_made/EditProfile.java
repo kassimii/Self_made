@@ -49,7 +49,7 @@ public class EditProfile extends AppCompatActivity {
 
     private int activityLevelSelected=-1;//variable for activity level to store to db
     private int goalSelected=-1; //variable for weight goal to store to db
-
+    private DatabaseReference databaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +63,16 @@ public class EditProfile extends AppCompatActivity {
         onMealButtonClick();
         onCaloriesButtonCLick();
 
-        setActivityList();
-        setGoalList();
-        onSaveProfileButtonClick();
-    }
+        if(FirebaseAuth.getInstance().getCurrentUser()!= null)
+        {
+            String userUid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+            databaseRef=FirebaseDatabase.getInstance().getReference("Users").child(userUid);
 
+            setActivityList();
+            setGoalList();
+            onSaveProfileButtonClick();
+        }
+    }
 
     public void onMealButtonClick() {
         setMealsButton = (Button) findViewById(R.id.meals_button);
@@ -75,19 +80,10 @@ public class EditProfile extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
-                        openMealHoursSettingActiviy();
+                        startActivity(new Intent(EditProfile.this, SetMealHours.class));
                     }
                 }
         );
-    }
-
-    public void openMealHoursSettingActiviy() {
-        Intent intent = new Intent(this, SetMealHours.class);
-        startActivity(intent);
-
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
     public void onCaloriesButtonCLick() {
@@ -96,22 +92,13 @@ public class EditProfile extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
-                        openCaloriesCounterActivity();
+                        startActivity(new Intent(EditProfile.this, CaloriesCounter.class));
                     }
                 });
 
     }
 
-    public void openCaloriesCounterActivity() {
-        Intent intent = new Intent(this, CaloriesCounter.class);
-        startActivity(intent);
-
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
-
-    public void setActivityList(){
+    private void setActivityList(){
         activityList = new ArrayList<>();
         activityList.add("--Please select activity level");
         activityList.add("Sedentary (little or no exercise)");
@@ -121,7 +108,7 @@ public class EditProfile extends AppCompatActivity {
         activityList.add("Very active (hard exercise 6-7 days/week)");
     }
 
-    public void setGoalList(){
+    private void setGoalList(){
         goalList = new ArrayList<>();
         goalList.add("--Please select weight goal");
         goalList.add("Lose weight");
@@ -270,25 +257,25 @@ public class EditProfile extends AppCompatActivity {
                 idealWeight = idealWeightInput.getText().toString();
 
                 if (age.length() != 0) {
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Age").setValue(age);
+                    databaseRef.child("Profile").child("Age").setValue(age);
                 }
                 if (height.length() != 0) {
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Height").setValue(height);
+                    databaseRef.child("Profile").child("Height").setValue(height);
                 }
                 if (weight.length() != 0) {
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Weight").setValue(weight);
+                    databaseRef.child("Profile").child("Weight").setValue(weight);
                 }
 
                 if(idealWeight.length() !=0){
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Ideal Weight").setValue(idealWeight);
+                    databaseRef.child("Profile").child("Ideal Weight").setValue(idealWeight);
                 }
 
                 if (isMale == true) {
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Gender").setValue("male");
+                    databaseRef.child("Profile").child("Gender").setValue("male");
                 }
 
                 if (isFemale == true) {
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Gender").setValue("female");
+                    databaseRef.child("Profile").child("Gender").setValue("female");
                 }
 
                 if (isAllergicToEggs == true) {
@@ -312,16 +299,16 @@ public class EditProfile extends AppCompatActivity {
                 }
 
                 if (allergies.length() != 0) {
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Allergies").setValue(allergies);
+                    databaseRef.child("Profile").child("Allergies").setValue(allergies);
                     allergies = "";
                 }
 
                 if(activityLevelSelected!=-1){
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Activity Level").setValue(activityLevelSelected);
+                    databaseRef.child("Profile").child("Activity Level").setValue(activityLevelSelected);
                 }
 
                 if(goalSelected!=-1){
-                    FirebaseDatabase.getInstance().getReference().child("Profile").child("Weight Goal").setValue(goalSelected);
+                    databaseRef.child("Profile").child("Weight Goal").setValue(goalSelected);
                 }
 
                 Toast.makeText(EditProfile.this, "Profile saved!", Toast.LENGTH_SHORT).show();
