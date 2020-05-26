@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +26,8 @@ public class CaloriesChart extends AppCompatActivity {
 
     private String[] caloriesArray;
 
+    private DatabaseReference databaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,12 @@ public class CaloriesChart extends AppCompatActivity {
         catch (NullPointerException e){}
         setContentView(R.layout.activity_calories_chart);
 
-        showLog();
+        if(FirebaseAuth.getInstance().getCurrentUser()!= null) {
+            String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            databaseRef = FirebaseDatabase.getInstance().getReference("Users").child(userUid);
+
+            showLog();
+        }
     }
 
 
@@ -45,7 +53,7 @@ public class CaloriesChart extends AppCompatActivity {
         final ArrayAdapter<String> caloriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,caloriesConsumedInfo);
         listViewCalories.setAdapter(caloriesAdapter);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reference = databaseRef;
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,7 +62,7 @@ public class CaloriesChart extends AppCompatActivity {
                 caloriesConsumedInfo.clear();
                 for(DataSnapshot snapshot: dataSnapshot.child("Daily Calories").getChildren()) {
                     //dateInfo.add(snapshot.getKey());
-                    caloriesConsumedInfo.add(snapshot.getKey() + "\t\t\t\t" + snapshot.getValue().toString() + " calories consumed");
+                    caloriesConsumedInfo.add(snapshot.getKey() + "th day of the year" + "\t\t\t\t" + snapshot.getValue().toString() + " calories consumed");
                     caloriesAdapter.notifyDataSetChanged();
                 }
             }

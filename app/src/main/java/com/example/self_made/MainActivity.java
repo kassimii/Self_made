@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        finish();
                         startActivity(new Intent(MainActivity.this, Login.class));
                     }
                 });
@@ -41,6 +42,7 @@ public class MainActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        finish();
                         startActivity(new Intent(MainActivity.this, SignUp.class));
                     }
                 });

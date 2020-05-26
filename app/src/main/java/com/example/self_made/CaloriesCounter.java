@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +52,8 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     private Calendar cDate, cTime;
     private int currentDate, dateFromDB;
 
+    private DatabaseReference databaseRef;
+
 
     @Override
     public void addFoodType(String foodType, String calories) {
@@ -67,20 +70,30 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         catch (NullPointerException e){}
         setContentView(R.layout.activity_calories_counter);
 
-        getCaloriesValuesFromDb();
-        updateDailyConsumedCalories();
-        saveCaloriesOfMeal();
-        showCaloriesConsumed();
-        showCaloriesLeft();
-        setFoodCategoryList();
         onProfileButtonClick();
         onMealButtonClick();
-        calculateNeededCalories();
-        getFoodTypesFromDatabase();
-        chooseFoodCategory();
-        addNewFoodType();
-        showCaloriesConsumedChart();
-        //updateCaloriesOnProgressBar();
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!= null)
+        {
+            String userUid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+            databaseRef=FirebaseDatabase.getInstance().getReference("Users").child(userUid);
+
+            getCaloriesValuesFromDb();
+            updateDailyConsumedCalories();
+            saveCaloriesOfMeal();
+            showCaloriesConsumed();
+            showCaloriesLeft();
+            setFoodCategoryList();
+            calculateNeededCalories();
+            getFoodTypesFromDatabase();
+            chooseFoodCategory();
+            addNewFoodType();
+            showCaloriesConsumedChart();
+            if(caloriesConsumedDb!=0)
+              updateCaloriesOnProgressBar();
+        }
+
+
     }
 
     public void onProfileButtonClick(){
@@ -127,9 +140,8 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
-
     public void getCaloriesValuesFromDb(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
+        DatabaseReference reference = databaseRef.child("Profile");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,7 +167,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         String currentDateString = String.valueOf(currentDate);
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
+        DatabaseReference reference = databaseRef.child("Profile");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -169,15 +181,19 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
             }
         });
 
-        Toast.makeText(this, String.valueOf(dateFromDB), Toast.LENGTH_SHORT).show();
-
-        if(dateFromDB!=currentDate){
-            caloriesConsumed = 0;
-            FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Consumed").setValue(caloriesConsumed);
-            FirebaseDatabase.getInstance().getReference().child("Profile").child("Current Day").setValue(currentDateString);
+        if(dateFromDB!=currentDate && dateFromDB!=0)
+        {
+            caloriesConsumedDb = 0;
+            databaseRef.child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
+            databaseRef.child("Profile").child("Current Day").setValue(currentDateString);
         }
 
-        FirebaseDatabase.getInstance().getReference().child("Daily Calories").child(currentDateString).setValue(caloriesConsumedDb);
+        if(dateFromDB!=0)
+        {
+            databaseRef.child("Daily Calories").child(currentDateString).setValue(caloriesConsumedDb);
+        }
+
+
 
     }
 
@@ -263,7 +279,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                     caloriesNeeded = AMR + 300;
                 }
 
-                FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Needed").setValue(caloriesNeeded);
+                databaseRef.child("Profile").child("Calories Needed").setValue(caloriesNeeded);
             }
 
             @Override
@@ -441,7 +457,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                     caloriesConsumedDb+= caloriesPerFoodType;
                     caloriesConsumed=1;
                    if(caloriesConsumed!=-1){
-                        FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
+                       databaseRef.child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
                         caloriesConsumed=-1;
                    }
                     showCaloriesConsumed();
@@ -457,7 +473,6 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     public void showCaloriesConsumed(){
         caloriesConsumedTextView = (TextView)findViewById(R.id.calories_consumed_textview);
         String caloriesConsumedString = String.valueOf(caloriesConsumedDb);
-        Log.d("tag", caloriesConsumedString);
         caloriesConsumedTextView.setText(caloriesConsumedString);
     }
 
@@ -484,7 +499,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     }
 
     public int calculateProgress(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Needed");
+        DatabaseReference reference = databaseRef.child("Profile").child("Calories Needed");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

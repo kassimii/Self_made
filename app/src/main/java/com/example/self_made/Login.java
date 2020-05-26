@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
-        
+
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.login_layout);
 

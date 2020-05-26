@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +58,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
 
     private final int NOTIFICATION_ID = 001;
 
+    private DatabaseReference databaseRef;
 
 
 
@@ -72,10 +74,18 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
 
         onProfileButtonClick();
         onCaloriesButtonCLick();
-        setHours();
-        showMealPlan();
-        sendBreakfastNotification();
-        saveMealHoursToDb();
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!= null) {
+            String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            databaseRef = FirebaseDatabase.getInstance().getReference("Users").child(userUid);
+
+            setHours();
+            showMealPlan();
+            sendBreakfastNotification();
+            saveMealHoursToDb();
+        }
+
+
 
 
     }
@@ -259,7 +269,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         show_meal_plan_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("MealHours");
+                DatabaseReference reference = databaseRef.child("MealHours");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -332,7 +342,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
                     breakfastMap.put("BHour", breakfast_hour);
                     breakfastMap.put("BMinute", breakfast_minute);
 
-                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Breakfast").setValue(breakfastMap);
+                    databaseRef.child("MealHours").child("Breakfast").setValue(breakfastMap);
                 }
 
                 //snack1
@@ -341,7 +351,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
                     snack1Map.put("S1Hour",snack1_hour);
                     snack1Map.put("S1Minute",snack1_minute);
 
-                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Snack1").setValue(snack1Map);
+                    databaseRef.child("MealHours").child("Snack1").setValue(snack1Map);
                 }
 
                 //lunch
@@ -350,7 +360,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
                     lunchMap.put("LHour", lunch_hour);
                     lunchMap.put("LMinute", lunch_minute);
 
-                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Lunch").setValue(lunchMap);
+                    databaseRef.child("MealHours").child("Lunch").setValue(lunchMap);
                 }
 
                 //snack2
@@ -359,7 +369,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
                     snack2Map.put("S2Hour",snack2_hour);
                     snack2Map.put("S2Minute",snack2_minute);
 
-                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Snack2").setValue(snack2Map);
+                    databaseRef.child("MealHours").child("Snack2").setValue(snack2Map);
                 }
 
                 //dinner
@@ -368,7 +378,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
                     dinnerMap.put("DHour", dinner_hour);
                     dinnerMap.put("DMinute", dinner_minute);
 
-                    FirebaseDatabase.getInstance().getReference().child("MealHours").child("Dinner").setValue(dinnerMap);
+                    databaseRef.child("MealHours").child("Dinner").setValue(dinnerMap);
                 }
 
                 Toast.makeText(SetMealHours.this, "Meal hours saved!", Toast.LENGTH_SHORT).show();
