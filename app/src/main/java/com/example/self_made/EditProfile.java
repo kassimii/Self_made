@@ -52,6 +52,7 @@ public class EditProfile extends AppCompatActivity {
     private int goalSelected=-1; //variable for weight goal to store to db
     private DatabaseReference databaseRef;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,11 +94,14 @@ public class EditProfile extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(EditProfile.this, CaloriesCounter.class));
+                        Intent intent = new Intent(EditProfile.this, CaloriesCounter.class);
+                        startActivity(intent);
                     }
                 });
 
     }
+
+
 
     private void setActivityList(){
         activityList = new ArrayList<>();
@@ -312,11 +316,18 @@ public class EditProfile extends AppCompatActivity {
                     databaseRef.child("Profile").child("Weight Goal").setValue(goalSelected);
                 }
 
+//                String zeroValue="1";
+//                databaseRef.child("Profile").child("Calories Consumed").setValue(zeroValue);
+//                databaseRef.child("Profile").child("Calories Needed").setValue(zeroValue);
+//                databaseRef.child("Profile").child("Current Day").setValue(zeroValue);
+
                 Toast.makeText(EditProfile.this, "Profile saved!", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
+
 }
 
 

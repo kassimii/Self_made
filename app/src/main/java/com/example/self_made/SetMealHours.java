@@ -36,7 +36,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
     private Button editProfileButton;
 
     private Button breakfast_button, snack1_button, lunch_button, snack2_button, dinner_button;
-    private TextView showHourBreakfast, showHourSnack1, showHourLunch, showHourSnack2, showHourDinner;
+    //private TextView showHourBreakfast, showHourSnack1, showHourLunch, showHourSnack2, showHourDinner;
 
     private Button save_meal_plan_button, show_meal_plan_button;
 
@@ -56,7 +56,7 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
         5-dinner
     */
 
-    private final int NOTIFICATION_ID = 001;
+    //private final int NOTIFICATION_ID = 001;
 
     private DatabaseReference databaseRef;
 
@@ -80,12 +80,48 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
             databaseRef = FirebaseDatabase.getInstance().getReference("Users").child(userUid);
 
             setHours();
-            showMealPlan();
             sendBreakfastNotification();
             saveMealHoursToDb();
+
+            show_meal_plan_button = (Button)findViewById(R.id.show_meal_plan_button);
+
+            show_meal_plan_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatabaseReference reference = databaseRef.child("MealHours");
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String BHour=dataSnapshot.child("Breakfast").child("BHour").getValue().toString();
+                            String BMinute=dataSnapshot.child("Breakfast").child("BMinute").getValue().toString();
+                            String S1Hour=dataSnapshot.child("Snack1").child("S1Hour").getValue().toString();
+                            String S1Minute=dataSnapshot.child("Snack1").child("S1Minute").getValue().toString();
+                            String LHour=dataSnapshot.child("Lunch").child("LHour").getValue().toString();
+                            String LMinute=dataSnapshot.child("Lunch").child("LMinute").getValue().toString();
+                            String S2Hour=dataSnapshot.child("Snack2").child("S2Hour").getValue().toString();
+                            String S2Minute=dataSnapshot.child("Snack2").child("S2Minute").getValue().toString();
+                            String DHour=dataSnapshot.child("Dinner").child("DHour").getValue().toString();
+                            String DMinute=dataSnapshot.child("Dinner").child("DMinute").getValue().toString();
+
+                            meal_plan_popup="Breakfast:     " + BHour + ":" + BMinute + "\n" +
+                                    "Snack 1:      " + S1Hour + ":" + S1Minute + "\n" +
+                                    "Lunch:          " + LHour + ":" + LMinute + "\n" +
+                                    "Snack 2:      " + S2Hour + ":" + S2Minute + "\n" +
+                                    "Dinner:         " + DHour + ":" + DMinute + "\n" ;
+
+                            ShowMealPlan showMealPlan = new ShowMealPlan();
+                            showMealPlan.show(getSupportFragmentManager(), "Meal Planning");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            });
         }
-
-
 
 
     }
@@ -262,45 +298,6 @@ public class SetMealHours extends AppCompatActivity implements TimePickerDialog.
 //                "Dinner: " + dinner_hour + ":" + dinner_minute + "\n" ;
     }
 
-    public void showMealPlan(){
-
-        show_meal_plan_button = (Button)findViewById(R.id.show_meal_plan_button);
-
-        show_meal_plan_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseReference reference = databaseRef.child("MealHours");
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String BHour=dataSnapshot.child("Breakfast").child("BHour").getValue().toString();
-                        String BMinute=dataSnapshot.child("Breakfast").child("BMinute").getValue().toString();
-                        String S1Hour=dataSnapshot.child("Snack1").child("S1Hour").getValue().toString();
-                        String S1Minute=dataSnapshot.child("Snack1").child("S1Minute").getValue().toString();
-                        String LHour=dataSnapshot.child("Lunch").child("LHour").getValue().toString();
-                        String LMinute=dataSnapshot.child("Lunch").child("LMinute").getValue().toString();
-                        String S2Hour=dataSnapshot.child("Snack2").child("S2Hour").getValue().toString();
-                        String S2Minute=dataSnapshot.child("Snack2").child("S2Minute").getValue().toString();
-                        String DHour=dataSnapshot.child("Dinner").child("DHour").getValue().toString();
-                        String DMinute=dataSnapshot.child("Dinner").child("DMinute").getValue().toString();
-
-                        meal_plan_popup="Breakfast:     " + BHour + ":" + BMinute + "\n" +
-                                        "Snack 1:      " + S1Hour + ":" + S1Minute + "\n" +
-                                        "Lunch:          " + LHour + ":" + LMinute + "\n" +
-                                        "Snack 2:      " + S2Hour + ":" + S2Minute + "\n" +
-                                        "Dinner:         " + DHour + ":" + DMinute + "\n" ;
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                ShowMealPlan showMealPlan = new ShowMealPlan();
-                showMealPlan.show(getSupportFragmentManager(), "Meal Planning");
-            }
-        });
-    }
 
 
     public void sendBreakfastNotification(){

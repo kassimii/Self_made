@@ -45,11 +45,10 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
 
     private int BMR, AMR, caloriesNeeded;
     private int caloriesConsumed=-1; //flag for saving calories consumed to db
-    public int caloriesNeededDb, caloriesConsumedDb;
+    private int caloriesNeededDb, caloriesConsumedDb;
     private int caloriesPerFoodType =-1; //variable for holding the calories each food type selected that have to be added to the daily calories consumed
     private int foodCategorySelected=-1; //variable to find which one of the food categories was selected used to extract calories from db
 
-    private Calendar cDate, cTime;
     private int currentDate, dateFromDB;
 
     private DatabaseReference databaseRef;
@@ -73,24 +72,47 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         onProfileButtonClick();
         onMealButtonClick();
 
+
         if(FirebaseAuth.getInstance().getCurrentUser()!= null)
         {
+
+            calculateNeededCalories();
+
             String userUid= FirebaseAuth.getInstance().getCurrentUser().getUid();
             databaseRef=FirebaseDatabase.getInstance().getReference("Users").child(userUid);
 
-            getCaloriesValuesFromDb();
+
+            DatabaseReference reference = databaseRef.child("Profile");
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String caloriesN, caloriesC;
+                        caloriesN = dataSnapshot.child("Calories Needed").getValue().toString();
+                        caloriesNeededDb = Integer.parseInt(caloriesN);
+
+                        caloriesC = dataSnapshot.child("Calories Consumed").getValue().toString();
+                        caloriesConsumedDb = Integer.parseInt(caloriesC);
+
+                        showCaloriesConsumed();
+                        showCaloriesLeft();
+                        if(caloriesConsumedDb!=0)
+                         updateCaloriesOnProgressBar();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             updateDailyConsumedCalories();
             saveCaloriesOfMeal();
-            showCaloriesConsumed();
-            showCaloriesLeft();
             setFoodCategoryList();
-            calculateNeededCalories();
             getFoodTypesFromDatabase();
             chooseFoodCategory();
             addNewFoodType();
             showCaloriesConsumedChart();
-            if(caloriesConsumedDb!=0)
-              updateCaloriesOnProgressBar();
         }
 
 
@@ -140,74 +162,6 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     }
 
-    public void getCaloriesValuesFromDb(){
-        DatabaseReference reference = databaseRef.child("Profile");
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String caloriesN = dataSnapshot.child("Calories Needed").getValue().toString();
-                caloriesNeededDb = Integer.parseInt(caloriesN);
-
-                String caloriesC = dataSnapshot.child("Calories Consumed").getValue().toString();
-                caloriesConsumedDb = Integer.parseInt(caloriesC);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-    public void updateDailyConsumedCalories(){
-        Calendar calendar = Calendar.getInstance();
-        currentDate = calendar.get(Calendar.DAY_OF_YEAR);
-        String currentDateString = String.valueOf(currentDate);
-
-
-        DatabaseReference reference = databaseRef.child("Profile");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               String date = dataSnapshot.child("Current Day").getValue().toString();
-               dateFromDB = Integer.parseInt(date);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        if(dateFromDB!=currentDate && dateFromDB!=0)
-        {
-            caloriesConsumedDb = 0;
-            databaseRef.child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
-            databaseRef.child("Profile").child("Current Day").setValue(currentDateString);
-        }
-
-        if(dateFromDB!=0)
-        {
-            databaseRef.child("Daily Calories").child(currentDateString).setValue(caloriesConsumedDb);
-        }
-
-
-
-    }
-
-    public void setFoodCategoryList(){
-        foodCategoryList =  new ArrayList<String>();
-        foodCategoryList.add("-Please select a food type-");
-        foodCategoryList.add("Breads and Cereals");
-        foodCategoryList.add("Meat and Fish");
-        foodCategoryList.add("Fruits and Vegetables");
-        foodCategoryList.add("Milk and Dairy");
-        foodCategoryList.add("Fats and Sugars");
-        foodCategoryList.add("Others");
-    }
-
     public void calculateNeededCalories(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
         reference.addValueEventListener(new ValueEventListener() {
@@ -236,7 +190,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                 heightInches = height*0.39;
 
                 if (gender.equals("male")) {
-                        BMRDouble = 66 + (6.23*weightPounds) + (12.7*heightInches) - (6.8*age);
+                    BMRDouble = 66 + (6.23*weightPounds) + (12.7*heightInches) - (6.8*age);
                 }
 
                 if (gender.equals("female")) {
@@ -288,6 +242,54 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
             }
         });
     }
+
+    public void updateDailyConsumedCalories(){
+        Calendar calendar = Calendar.getInstance();
+        currentDate = calendar.get(Calendar.DAY_OF_YEAR);
+        String currentDateString = String.valueOf(currentDate);
+
+
+        DatabaseReference reference = databaseRef.child("Profile");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               String date = dataSnapshot.child("Current Day").getValue().toString();
+               dateFromDB = Integer.parseInt(date);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        if(dateFromDB!=currentDate && dateFromDB!=0)
+        {
+            caloriesConsumedDb = 0;
+            databaseRef.child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
+            databaseRef.child("Profile").child("Current Day").setValue(currentDateString);
+        }
+
+        if(dateFromDB!=0)
+        {
+            databaseRef.child("Daily Calories").child(currentDateString).setValue(caloriesConsumedDb);
+        }
+
+    }
+
+    public void setFoodCategoryList(){
+        foodCategoryList =  new ArrayList<String>();
+        foodCategoryList.add("-Please select a food type-");
+        foodCategoryList.add("Breads and Cereals");
+        foodCategoryList.add("Meat and Fish");
+        foodCategoryList.add("Fruits and Vegetables");
+        foodCategoryList.add("Milk and Dairy");
+        foodCategoryList.add("Fats and Sugars");
+        foodCategoryList.add("Others");
+    }
+
 
     public void getFoodTypesFromDatabase(){
 
