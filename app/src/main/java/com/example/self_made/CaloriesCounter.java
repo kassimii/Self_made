@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,8 +49,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     private int foodCategorySelected=-1; //variable to find which one of the food categories was selected used to extract calories from db
 
     private Calendar cDate, cTime;
-    private String currentDate, currentTime;
-
+    private int currentDate, dateFromDB;
 
 
     @Override
@@ -149,30 +149,35 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
 
     }
 
-
-//    public void setCaloriesConsumed(int CC) {
-//        this.caloriesConsumedDb = CC;
-//    }
-//
-//    public void setCaloriesNeeded(int CN){
-//        this.caloriesNeededDb = CN;
-//    }
-
     public void updateDailyConsumedCalories(){
-        cDate = Calendar.getInstance();
-        SimpleDateFormat sDate = new SimpleDateFormat("dd-MM-yyyy");
-        currentDate = sDate.format(cDate.getTime());
+        Calendar calendar = Calendar.getInstance();
+        currentDate = calendar.get(Calendar.DAY_OF_YEAR);
+        String currentDateString = String.valueOf(currentDate);
 
-        cTime = Calendar.getInstance();
-        SimpleDateFormat sTime = new SimpleDateFormat("hh:mm:ss");
-        currentTime = sTime.format(cTime.getTime());
 
-        if(currentTime.equals("00:00:00")){
-            caloriesConsumedDb=0;
-            FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Consumed").setValue(caloriesConsumedDb);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               String date = dataSnapshot.child("Current Day").getValue().toString();
+               dateFromDB = Integer.parseInt(date);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Toast.makeText(this, String.valueOf(dateFromDB), Toast.LENGTH_SHORT).show();
+
+        if(dateFromDB!=currentDate){
+            caloriesConsumed = 0;
+            FirebaseDatabase.getInstance().getReference().child("Profile").child("Calories Consumed").setValue(caloriesConsumed);
+            FirebaseDatabase.getInstance().getReference().child("Profile").child("Current Day").setValue(currentDateString);
         }
 
-        FirebaseDatabase.getInstance().getReference().child("Daily Calories").child(currentDate).setValue(caloriesConsumedDb);
+        FirebaseDatabase.getInstance().getReference().child("Daily Calories").child(currentDateString).setValue(caloriesConsumedDb);
 
     }
 
@@ -452,6 +457,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     public void showCaloriesConsumed(){
         caloriesConsumedTextView = (TextView)findViewById(R.id.calories_consumed_textview);
         String caloriesConsumedString = String.valueOf(caloriesConsumedDb);
+        Log.d("tag", caloriesConsumedString);
         caloriesConsumedTextView.setText(caloriesConsumedString);
     }
 
