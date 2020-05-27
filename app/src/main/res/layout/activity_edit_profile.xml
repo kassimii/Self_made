@@ -24,6 +24,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/logout_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginTop="50dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@drawable/round_button"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/edit_profile_title2"
         android:layout_width="wrap_content"
