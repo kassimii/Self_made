@@ -74,6 +74,17 @@ public class EditProfile extends AppCompatActivity {
             setGoalList();
             onSaveProfileButtonClick();
 
+
+            logOutButton = (Button) findViewById(R.id.logout_button);
+            logOutButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(EditProfile.this, MainActivity.class));
+                        }
+                    });
+
         }
     }
 
