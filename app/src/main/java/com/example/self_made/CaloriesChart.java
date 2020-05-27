@@ -61,7 +61,6 @@ public class CaloriesChart extends AppCompatActivity {
                 dateInfo.clear();
                 caloriesConsumedInfo.clear();
                 for(DataSnapshot snapshot: dataSnapshot.child("Daily Calories").getChildren()) {
-                    //dateInfo.add(snapshot.getKey());
                     caloriesConsumedInfo.add(snapshot.getKey() + "th day of the year" + "\t\t\t\t" + snapshot.getValue().toString() + " calories consumed");
                     caloriesAdapter.notifyDataSetChanged();
                 }

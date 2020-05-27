@@ -326,7 +326,6 @@ public class EditProfile extends AppCompatActivity {
                             databaseRef.child("Profile").child("Calories Consumed").setValue(zeroValue);
                             databaseRef.child("Profile").child("Calories Needed").setValue(zeroValue);
                             databaseRef.child("Profile").child("Current Day").setValue(zeroValue);
-                            Toast.makeText(EditProfile.this, "created", Toast.LENGTH_SHORT).show();
                         }
                     }
 
