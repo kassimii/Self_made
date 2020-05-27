@@ -73,6 +73,7 @@ public class EditProfile extends AppCompatActivity {
             setActivityList();
             setGoalList();
             onSaveProfileButtonClick();
+
         }
     }
 

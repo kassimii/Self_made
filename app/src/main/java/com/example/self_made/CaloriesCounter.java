@@ -76,11 +76,11 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
         if(FirebaseAuth.getInstance().getCurrentUser()!= null)
         {
 
-            calculateNeededCalories();
 
             String userUid= FirebaseAuth.getInstance().getCurrentUser().getUid();
             databaseRef=FirebaseDatabase.getInstance().getReference("Users").child(userUid);
 
+            calculateNeededCalories();
 
             DatabaseReference reference = databaseRef.child("Profile");
 
@@ -163,7 +163,7 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
     }
 
     public void calculateNeededCalories(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Profile");
+        DatabaseReference reference = databaseRef.child("Profile");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -234,13 +234,13 @@ public class CaloriesCounter extends AppCompatActivity implements AdapterView.On
                 }
 
                 databaseRef.child("Profile").child("Calories Needed").setValue(caloriesNeeded);
-            }
+           }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+       });
     }
 
     public void updateDailyConsumedCalories(){
