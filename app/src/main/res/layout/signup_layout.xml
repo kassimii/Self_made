@@ -29,8 +29,8 @@
         android:inputType="textCapWords"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -46,8 +46,8 @@
         android:inputType="textEmailAddress"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/button_selectorcolor"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -62,8 +62,8 @@
         android:inputType="textPassword"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -78,8 +78,8 @@
         android:inputType="textPassword"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="16sp" />
 
     <Button

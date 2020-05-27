@@ -52,6 +52,8 @@ public class EditProfile extends AppCompatActivity {
     private int goalSelected=-1; //variable for weight goal to store to db
     private DatabaseReference databaseRef;
 
+    private ImageButton logOutButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class EditProfile extends AppCompatActivity {
             onSaveProfileButtonClick();
 
 
-            logOutButton = (Button) findViewById(R.id.logout_button);
+            logOutButton = (ImageButton) findViewById(R.id.logout_button);
             logOutButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
